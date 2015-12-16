@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sbcl --exec "(ql:quickload :webapp)" --exec "(webapp:start-webapp)"
+
+
