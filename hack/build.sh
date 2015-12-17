@@ -53,11 +53,6 @@ function squash {
   ${HOME}/.local/bin/docker-scripts squash -f $base ${IMAGE_NAME}
 }
 
-# Versions are stored in subdirectories. You can specify VERSION variable
-# to build just one single version. By default we build all versions
-dirs=${VERSION:-$VERSIONS}
-
-for dir in ${dirs}; do
   case " $OPENSHIFT_NAMESPACES " in
     *\ ${dir}\ *) ;;
     *)
@@ -68,7 +63,7 @@ for dir in ${dirs}; do
       fi
   esac
 
-  IMAGE_NAME="${NAMESPACE}${BASE_IMAGE_NAME}-${dir//./}-${OS}"
+  IMAGE_NAME="${NAMESPACE}${BASE_IMAGE_NAME}-${OS}"
 
   if [[ -v TEST_MODE ]]; then
     IMAGE_NAME+="-candidate"
@@ -76,7 +71,6 @@ for dir in ${dirs}; do
 
   echo "-> Building ${IMAGE_NAME} ..."
 
-  pushd ${dir} > /dev/null
   if [ "$OS" == "rhel7" -o "$OS" == "rhel7-candidate" ]; then
     docker_build_with_version Dockerfile.rhel7
   else
@@ -92,5 +86,3 @@ for dir in ${dirs}; do
     fi
   fi
 
-  popd > /dev/null
-done

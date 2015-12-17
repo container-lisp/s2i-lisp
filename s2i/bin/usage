@@ -11,5 +11,5 @@ Sample invocation:
 s2i build https://github.com/atgreen/sample-lisp-app.git centos/lisp-10-centos7 sample-lisp-app
 
 You can then run the resulting image via:
-docker run -p 9090:9090 sample-lisp-app
+docker run -p 8080:8080 sample-lisp-app
 EOF

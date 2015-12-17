@@ -5,7 +5,6 @@ set -e
 echo "---> Installing application source ..."
 mkdir -p ./quicklisp/local-projects/webapp
 cp -Rf /tmp/src/. ./quicklisp/local-projects/webapp
-ls -lrt
 
 echo "---> Building your Common Lisp application from source ..."
 sbcl --eval "(ql:quickload :webapp)" --eval "(quit)"

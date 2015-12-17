@@ -1,117 +1,95 @@
-Common Lisp Docker images
-=========================
+Common Lisp Docker image
+========================
 
-This repository contains the source for building various versions of
-the Ruby application as a reproducible Docker image using
+This repository contains the source for building a Quicklisp based
+Common Lisp application as a reproducible Docker image using
 [source-to-image](https://github.com/openshift/source-to-image).
-Users can choose between RHEL and CentOS based builder images.
-The resulting image can be run using [Docker](http://docker.io).
-
-
-Versions
----------------
-Ruby versions currently provided are:
-* ruby-2.0
-* ruby-2.2
-
-RHEL versions currently supported are:
-* RHEL7
-
-CentOS versions currently supported are:
-* CentOS7
-
-
-Installation
----------------
-To build a Ruby image, choose either the CentOS or RHEL based image:
-*  **RHEL based image**
-
-    To build a RHEL based Ruby image, you need to run the build on a properly
-    subscribed RHEL machine.
-
-    ```
-    $ git clone https://github.com/openshift/sti-ruby.git
-    $ cd sti-ruby
-    $ make build TARGET=rhel7 VERSION=2.0
-    ```
-
-*  **CentOS based image**
-
-    This image is available on DockerHub. To download it run:
-
-    ```
-    $ docker pull openshift/ruby-20-centos7
-    ```
-
-    To build a Ruby image from scratch run:
-
-    ```
-    $ git clone https://github.com/openshift/sti-ruby.git
-    $ cd sti-ruby
-    $ make build VERSION=2.0
-    ```
-
-**Notice: By omitting the `VERSION` parameter, the build/test action will be performed
-on all provided versions of Ruby.**
-
+Users can choose between RHEL and CentOS based builder images.  The
+resulting image can be run using [Docker](http://docker.io).
 
 
 Usage
----------------------------------
-
-For information about usage of Dockerfile for Ruby 2.0,
-see [usage documentation](2.0/README.md).
-
-For information about usage of Dockerfile for Ruby 2.2,
-see [usage documentation](2.2/README.md).
-
-
-Test
 ---------------------
-This repository also provides a [S2I](https://github.com/openshift/source-to-image) test framework,
-which launches tests to check functionality of a simple Ruby application built on top of the sti-ruby image.
+To build a simple [sample-lisp-app](https://github.com/atgreen/sample-lisp-app) application
+using standalone [S2I](https://github.com/openshift/source-to-image) and then run the
+resulting image with [Docker](http://docker.io) execute:
 
-Users can choose between testing a Ruby test application based on a RHEL or CentOS image.
-
-*  **RHEL based image**
-
-    To test a RHEL7-based Ruby-2.0 image, you need to run the test on a properly
-    subscribed RHEL machine.
-
+*  **For RHEL based image**
     ```
-    $ cd sti-ruby
-    $ make test TARGET=rhel7 VERSION=2.0
+    $ s2i build https://github.com/atgreen/sample-lisp-app rhel/lisp-rhel7 sample-lisp-app
+    $ docker run -p 8080:8080 sample-lisp-app
     ```
 
-*  **CentOS based image**
-
+*  **For CentOS based image**
     ```
-    $ cd sti-ruby
-    $ make test VERSION=2.0
+    $ s2i build https://github.com/atgreen/sample-lisp-app centos/lisp-centos7 sample-lisp-app
+    $ docker run -p 8080:8080 sample-lisp-app
     ```
 
-**Notice: By omitting the `VERSION` parameter, the build/test action will be performed
-on all the provided versions of Ruby.**
+**Accessing the application:**
+```
+$ curl 127.0.0.1:8080
+```
 
 
 Repository organization
 ------------------------
-* **`<ruby-version>`**
+    * **Dockerfile**
 
-    Dockerfile and scripts to build container images from.
+        CentOS based Dockerfile.
 
-* **`hack/`**
+    * **Dockerfile.rhel7**
 
-    Folder containing scripts which are responsible for build and test actions performed by the `Makefile`.
+        RHEL based Dockerfile. In order to perform build or test actions on this
+        Dockerfile you need to run the action on a properly subscribed RHEL machine.
+
+    * **`s2i/bin/`**
+
+        This folder contains scripts that are run by [S2I](https://github.com/openshift/source-to-image):
+
+        *   **assemble**
+
+            Used to install the sources into the location where the application
+            will be run and prepare the application for deployment (eg. installing
+            modules using bundler, etc.)
+
+        *   **run**
+
+            This script is responsible for running the application by using the
+            application web server.
+
+        *   **usage***
+
+            This script prints the usage of this image.
+
+    * **`contrib/`**
+
+        This folder contains a file with commonly used modules.
 
 
-Image name structure
-------------------------
-##### Structure: openshift/1-2-3
+Environment variables
+---------------------
 
-1. Platform name (lowercase) - ruby
-2. Platform version(without dots) - 20
-3. Base builder image - centos7/rhel7
+To set these environment variables, you can place them as a key value pair into a `.sti/environment`
+file inside your source code repository.
 
-Examples: `openshift/ruby-20-centos7`, `openshift/ruby-20-rhel7`
+* **APP_EVAL1**
 
+    SBCL evaluates this lisp form first at start up.  Use this to load
+    the project with quicklisp like so: "(ql:quickload :webapp)".
+
+* **APP_EVAL2**
+
+    SBCL evaluates this lisp form second at start up.  Use this to
+    start the project that was loaded in APP_EVAL1.  For
+    instance: "(webapp:start-webapp)".
+
+
+To change your source code in running container, use Docker's [exec](http://docker.io) command:
+```
+docker exec -it <CONTAINER_ID> /bin/bash
+```
+
+After you [Docker exec](http://docker.io) into the running container,
+your current directory is set to `/opt/app-root`, and the source code
+is located under quicklisp/local-projects.
