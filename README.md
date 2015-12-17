@@ -34,35 +34,35 @@ $ curl 127.0.0.1:8080
 
 Repository organization
 ------------------------
-    * **Dockerfile**
+* **Dockerfile**
 
         CentOS based Dockerfile.
 
-    * **Dockerfile.rhel7**
+* **Dockerfile.rhel7**
 
         RHEL based Dockerfile. In order to perform build or test actions on this
         Dockerfile you need to run the action on a properly subscribed RHEL machine.
 
-    * **`s2i/bin/`**
+* **`s2i/bin/`**
 
-        This folder contains scripts that are run by [S2I](https://github.com/openshift/source-to-image):
+      This folder contains scripts that are run by [S2I](https://github.com/openshift/source-to-image):
 
-        *   **assemble**
+  *   **assemble**
 
             Used to install the sources into the location where the application
             will be run and prepare the application for deployment (eg. installing
             modules using bundler, etc.)
 
-        *   **run**
+  *   **run**
 
             This script is responsible for running the application by using the
             application web server.
 
-        *   **usage***
+  *   **usage***
 
             This script prints the usage of this image.
 
-    * **`contrib/`**
+* **`contrib/`**
 
         This folder contains a file with commonly used modules.
 
