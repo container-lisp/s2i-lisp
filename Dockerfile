@@ -1,4 +1,4 @@
-FROM openshift/base-centos7 
+FROM rhel7
 
 # This image provides a Common Lisp environment based on QuickLisp and
 # that you can use to run your Common Lisp applications.
@@ -14,6 +14,8 @@ LABEL io.k8s.description="Platform for building and running Common Lisp applicat
       io.openshift.expose-services="8080:http" \
       io.openshift.tags="builder,cl,lisp,sbcl"
 
+RUN yum install -y \
+        https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum install -y sbcl && \
     yum clean all -y
 

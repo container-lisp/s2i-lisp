@@ -1,0 +1,79 @@
+{
+   "kind": "List",
+   "apiVersion": "v1",
+   "metadata": {
+      "name": "lisp-s2i"
+   },
+   "items": [
+      {
+        "kind": "BuildConfig",
+        "apiVersion": "v1",
+        "metadata":{
+          "name": "lisp-rhel7-build"
+        },
+        "spec": {
+          "triggers": [
+             {
+                "type": "GitHub",
+                "github": {
+                   "secret": "secret101"
+                }
+             },
+             {
+                "type": "ImageChange",
+                "imageChange": {}
+             }
+          ],
+          "source" : {
+            "type" : "Git",
+            "git" : {
+              "uri": "git://github.com/atgreen/sti-lisp.git"
+            },
+            "contextDir": "1.0"
+          },
+          "strategy": {
+            "type": "Docker",
+            "dockerStrategy": {
+              "env": [
+                {
+                  "name": "IMAGE_NAME",
+                  "value": "openshift/lisp-rhel7"
+                }],
+              "from": {
+                 "kind": "ImageStreamTag",
+                 "name": "swarm-centos:latest"
+              }
+            }
+          },
+          "output": {
+            "to": {
+              "kind": "ImageStreamTag",
+              "name": "lisp-rhel7:latest"
+            }
+          }
+        }
+      },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "lisp-rhel7"
+      },
+      "spec": {
+          "dockerImageRepository": "",
+          "tags": [
+             {
+                "name": "latest",
+                "annotations": {
+                   "description": "Common Lisp S2I image",
+                   "iconClass": "icon-lisp",
+                   "tags": "builder,lisp",
+                   "supports": "lisp:1",
+                   "version": "1.0"
+                }
+             }
+          ]
+       }
+    }
+  ]
+}
