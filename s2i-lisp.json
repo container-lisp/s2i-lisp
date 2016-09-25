@@ -27,7 +27,7 @@
           "source" : {
             "type" : "Git",
             "git" : {
-              "uri": "git://github.com/atgreen/sti-lisp.git"
+              "uri": "git://github.com/atgreen/s2i-lisp.git"
             },
             "contextDir": "1.0"
           },
