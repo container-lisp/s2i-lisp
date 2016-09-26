@@ -65,14 +65,14 @@ for dir in ${dirs}; do
     *\ ${dir}\ *) ;;
     *)
       if [ "${OS}" == "centos7" ]; then
-        NAMESPACE="centos/"
+        NAMESPACE="moxielogic/"
       else
         # we don't test rhel versions of SCL owned images
         if [[ "${SKIP_RHEL_SCL}" == "1" ]]; then
           echo "Skipping rhel scl image ${BASE_IMAGE_NAME}-${dir//./}-{$OS}"
           continue
         fi
-        NAMESPACE="rhscl/"
+        NAMESPACE="moxielogic/"
       fi
   esac
 
