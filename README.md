@@ -1,22 +1,15 @@
 Common Lisp + Quicklisp OpenShift Build Image
 ==============================================
 
-This repository contains the source for building a Quicklisp based Common Lisp application as a reproducible docker image using [source-to-image](https://github.com/openshift/source-to-image). Users can choose between RHEL and CentOS based builder images.  The resulting image can be run using [docker](http://docker.io).
+This repository contains the source for building a Quicklisp based Common Lisp application as a reproducible docker image using [source-to-image](https://github.com/openshift/source-to-image). This docker image is CentOS based, but the project includes Dockerfile.rhel7 for creating a RHEL based image as well.  The resulting images can be run using [docker](http://docker.io).
 
 
 Usage
 ---------------------
 To build a simple [sample-lisp-app](https://github.com/atgreen/sample-lisp-app) application using standalone [S2I](https://github.com/openshift/source-to-image) and then run the resulting image with [docker](http://docker.io) execute:
 
-*  **For RHEL based image**
     ```
-    $ s2i build https://github.com/atgreen/sample-lisp-app rhel/lisp-rhel7 sample-lisp-app
-    $ docker run -p 8080:8080 sample-lisp-app
-    ```
-
-*  **For CentOS based image**
-    ```
-    $ s2i build https://github.com/atgreen/sample-lisp-app centos/lisp-centos7 sample-lisp-app
+    $ s2i build https://github.com/atgreen/sample-lisp-app atgreen/s2i-lisp sample-lisp-app
     $ docker run -p 8080:8080 sample-lisp-app
     ```
 
