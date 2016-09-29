@@ -20,7 +20,7 @@ Run interactively as above, you can access the sample-lisp-app like so:
 $ curl 127.0.0.1:8080
 ```
 
-You will likely, however, prefer OpenShift, where applications are created like so:
+You will likely, however, prefer [OpenShift](https://www.openshift.com), where applications are created like so:
 ```
 $ oc new-app atgreen/s2i-lisp~git://github.com/atgreen/sample-lisp-app sample-lisp-app
 ```
@@ -29,8 +29,11 @@ A [swank](https://common-lisp.net/project/slime/) server is started on port 4005
 ```
 oc port-forward sample-lisp-app-1-h5o5f 4005
 ```
+
 Follow this up in Emacs with...
+
 ```M-x slime-connect RET RET```
+
 To teach Emacs how to translate filenames between the remote and local machines, you'll need to define [```slime-filename-translations```](https://common-lisp.net/project/slime/doc/html/Setting-up-pathname-translations.html#Setting-up-pathname-translations).   
 
 There are a number of excellent screencasts and tutorials on using SLIME on the project web site at [https://common-lisp.net/project/slime](https://common-lisp.net/projects/slime).
