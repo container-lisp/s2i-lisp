@@ -14,40 +14,26 @@ To build a simple [sample-lisp-app](https://github.com/atgreen/sample-lisp-app) 
     ```
 
 **Accessing the application:**
+
+Run interactively as above, you can access the sample-lisp-app like so:
 ```
 $ curl 127.0.0.1:8080
 ```
 
+You will likely, however, prefer OpenShift, where applications are created like so:
+```
+$ oc new-app atgreen/s2i-lisp~git://github.com/atgreen/sample-lisp-app sample-lisp-app
+```
 
-Repository organization
-------------------------
-* **Dockerfile**
+A [swank](https://common-lisp.net/project/slime/) server is started on port 4005 for every application.  With OpenShift, you can forward port 4005 to your local host and then connect to it with [SLIME](https://common-lisp.net/project/slime/) for interactive [Emacs](https://www.gnu.org/software/emacs/) based development.  Just identify the pod running your container with `oc get pods`, and then....
+```
+oc port-forward sample-lisp-app-1-h5o5f 4005
+```
+Follow this up in Emacs with...
+```M-x slime-connect RET RET```
+To teach Emacs how to translate filenames between the remote and local machines, you'll need to define [```slime-filename-translations```](https://common-lisp.net/project/slime/doc/html/Setting-up-pathname-translations.html#Setting-up-pathname-translations).   
 
-        CentOS based Dockerfile.
-
-* **Dockerfile.rhel7**
-
-        RHEL based Dockerfile. In order to perform build or test actions on this
-        Dockerfile you need to run the action on a properly subscribed RHEL machine.
-
-* **`s2i/bin/`**
-
-      This folder contains scripts that are run by [S2I](https://github.com/openshift/source-to-image) :
-
-  *   **assemble**
-
-            Used to install the sources into the location where the application
-            will be run and prepare the application for deployment (eg. installing
-            modules using bundler, etc.)
-
-  *   **run**
-
-            This script is responsible for running the application by using the
-            application web server.
-
-  *   **usage***
-
-            This script prints the usage of this image.
+There are a number of excellent screencasts and tutorials on using SLIME on the project web site at [https://common-lisp.net/project/slime](https://common-lisp.net/projects/slime).
 
 Environment variables
 ---------------------
@@ -67,9 +53,3 @@ file inside your source code repository.
     instance: "(webapp:start-webapp)".
 
 
-To change your source code in running container, use Docker's [exec](http://docker.io) command:
-```
-docker exec -it <CONTAINER_ID> /bin/bash
-```
-
-After you [docker exec](http://docker.io) into the running container, your current directory is set to `/opt/app-root`, and the source code is located under quicklisp/local-projects.
