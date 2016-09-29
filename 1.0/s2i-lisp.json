@@ -2,7 +2,7 @@
    "kind": "List",
    "apiVersion": "v1",
    "metadata": {
-      "name": "lisp-s2i"
+      "name": "s2i-lisp"
    },
    "items": [
       {

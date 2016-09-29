@@ -5,13 +5,13 @@ FROM rhscl/s2i-base-rhel7
 
 MAINTAINER Anthony Green <green@redhat.com>
 
-EXPOSE 80
+EXPOSE 8080
 
 ENV LISP_VERSION 1.0
 
 LABEL io.k8s.description="Platform for building and running Common Lisp applications" \
       io.k8s.display-name="Common Lisp" \
-      io.openshift.expose-services="80:http" \
+      io.openshift.expose-services="8080:http" \
       io.openshift.tags="builder,cl,lisp,sbcl"
 
 RUN yum install -y \

@@ -8,7 +8,7 @@ To use it, install S2I: https://github.com/openshift/source-to-image
 
 Sample invocation:
 
-s2i build https://github.com/atgreen/sample-lisp-app.git centos/lisp-10-centos7 sample-lisp-app
+s2i build https://github.com/atgreen/sample-lisp-app.git atgreen/lisp-centos7 sample-lisp-app
 
 You can then run the resulting image via:
 docker run -p 8080:8080 sample-lisp-app
