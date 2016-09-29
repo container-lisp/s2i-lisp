@@ -1,18 +1,12 @@
-Common Lisp Docker image
-========================
+Common Lisp + Quicklisp OpenShift Build Image
+==============================================
 
-This repository contains the source for building a Quicklisp based
-Common Lisp application as a reproducible Docker image using
-[source-to-image](https://github.com/openshift/source-to-image).
-Users can choose between RHEL and CentOS based builder images.  The
-resulting image can be run using [Docker](http://docker.io).
+This repository contains the source for building a Quicklisp based Common Lisp application as a reproducible docker image using [source-to-image](https://github.com/openshift/source-to-image). Users can choose between RHEL and CentOS based builder images.  The resulting image can be run using [docker](http://docker.io).
 
 
 Usage
 ---------------------
-To build a simple [sample-lisp-app](https://github.com/atgreen/sample-lisp-app) application
-using standalone [S2I](https://github.com/openshift/source-to-image) and then run the
-resulting image with [Docker](http://docker.io) execute:
+To build a simple [sample-lisp-app](https://github.com/atgreen/sample-lisp-app) application using standalone [S2I](https://github.com/openshift/source-to-image) and then run the resulting image with [docker](http://docker.io) execute:
 
 *  **For RHEL based image**
     ```
@@ -45,7 +39,7 @@ Repository organization
 
 * **`s2i/bin/`**
 
-      This folder contains scripts that are run by [S2I](https://github.com/openshift/source-to-image):
+      This folder contains scripts that are run by [S2I](https://github.com/openshift/source-to-image) :
 
   *   **assemble**
 
@@ -62,15 +56,10 @@ Repository organization
 
             This script prints the usage of this image.
 
-* **`contrib/`**
-
-        This folder contains a file with commonly used modules.
-
-
 Environment variables
 ---------------------
 
-To set these environment variables, you can place them as a key value pair into a `.sti/environment`
+To set these environment variables, you can place them as a key value pair into a `.s2i/environment`
 file inside your source code repository.
 
 * **APP_EVAL1**
@@ -90,6 +79,4 @@ To change your source code in running container, use Docker's [exec](http://dock
 docker exec -it <CONTAINER_ID> /bin/bash
 ```
 
-After you [Docker exec](http://docker.io) into the running container,
-your current directory is set to `/opt/app-root`, and the source code
-is located under quicklisp/local-projects.
+After you [docker exec](http://docker.io) into the running container, your current directory is set to `/opt/app-root`, and the source code is located under quicklisp/local-projects.
