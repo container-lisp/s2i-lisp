@@ -10,5 +10,6 @@
 
 (with-open-file (out "/opt/app-root/.sbclrc" :direction :output)
   (format out "(load \"/opt/app-root/quicklisp\/setup.lisp\")")
+  (format out "(ql:quickload :swank)")
   (format out "(swank:create-server :port 4005 :dont-close t :coding-system \"utf-8-unix\")"))
 
