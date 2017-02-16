@@ -1,4 +1,4 @@
-FROM openshift/base-centos7 
+FROM openshift/base-centos7
 
 # This image provides a Common Lisp environment based on QuickLisp and
 # that you can use to run your Common Lisp applications.
@@ -14,7 +14,9 @@ LABEL io.k8s.description="Platform for building and running Common Lisp applicat
       io.openshift.expose-services="8080:http" \
       io.openshift.tags="builder,cl,lisp,sbcl"
 
-RUN yum install -y sbcl && \
+RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm && \
+    yum update -y && \
+    yum install -y sbcl && \
     yum clean all -y
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
