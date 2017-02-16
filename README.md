@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/atgreen/s2i-lisp.svg?branch=master)](https://travis-ci.org/atgreen/s2i-lisp)
+
 Common Lisp + Quicklisp OpenShift Build Image
 ==============================================
 
