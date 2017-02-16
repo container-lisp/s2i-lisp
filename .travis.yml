@@ -1,0 +1,21 @@
+sudo: required
+
+language: c
+
+services:
+  - docker
+
+before_install:
+  - make
+
+script:
+- 
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+      docker push atgreen/s2i-lisp;
+    fi
+  - echo All done.
+
+
