@@ -40,6 +40,12 @@ To teach Emacs how to translate filenames between the remote and local machines,
 
 There are a number of excellent screencasts and tutorials on using SLIME on the project web site at [https://common-lisp.net/project/slime](https://common-lisp.net/projects/slime).
 
+Note that swank, by default, is configured to only listen on the
+localhost loopback device.  This works well with OpenShift port
+forwarding, as above, but if you run this container by hand you will
+want to use the docker `--net host` option to allow for connections to
+swank.
+
 Environment variables
 ---------------------
 
