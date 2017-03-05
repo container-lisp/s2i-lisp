@@ -14,7 +14,7 @@ LABEL io.k8s.description="Platform for building and running Common Lisp applicat
       io.openshift.expose-services="8080:http" \
       io.openshift.tags="builder,cl,lisp,sbcl"
 
-RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm && \
+RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     yum update -y && \
     yum install -y sbcl && \
     yum clean all -y
