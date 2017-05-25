@@ -24,7 +24,7 @@ $ curl 127.0.0.1:8080
 
 You will likely, however, prefer [OpenShift](https://www.openshift.com), where applications are created like so:
 ```
-$ oc new-app atgreen/lisp-10-centos7~git://github.com/atgreen/sample-lisp-app sample-lisp-app
+$ oc new-app atgreen/lisp-10-centos7~git://github.com/atgreen/sample-lisp-app
 ```
 
 A [swank](https://common-lisp.net/project/slime/) server is started on port 4005 for every application.  With OpenShift, you can forward port 4005 to your local host and then connect to it with [SLIME](https://common-lisp.net/project/slime/) for interactive [Emacs](https://www.gnu.org/software/emacs/) based development.  Just identify the pod running your container with `oc get pods`, and then....
@@ -52,15 +52,13 @@ Environment variables
 To set these environment variables, you can place them as a key value pair into a `.s2i/environment`
 file inside your source code repository.
 
-* **APP_EVAL1**
+* **APP_SYSTEM_NAME**
 
-    SBCL evaluates this lisp form first at start up.  Use this to load
-    the project with quicklisp like so: "(ql:quickload :webapp)".
+    The name that quicklisp will know this application by.
 
-* **APP_EVAL2**
+* **APP_EVAL**
 
-    SBCL evaluates this lisp form second at start up.  Use this to
-    start the project that was loaded in APP_EVAL1.  For
-    instance: "(webapp:start-webapp)".
+    SBCL evaluates this lisp form after ql:quickload'ing
+    :$APP_SYSTEM_NAME.  For instance: "(webapp:start-webapp)".
 
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sbcl --eval "`eval echo ${APP_EVAL1}`" --eval "`eval echo ${APP_EVAL2}`"
+sbcl --eval "(ql:quickload :`eval echo ${APP_SYSTEM_NAME}`)" --eval "`eval echo ${APP_EVAL}`"
 
 
 
