@@ -23,7 +23,7 @@ RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 
 ENV HOME /opt/app-root
-RUN chown -R 1001:0 /opt/app-root
+RUN chown -R 1001:1001 /opt/app-root
 USER 1001
 WORKDIR /opt/app-root
 RUN wget http://beta.quicklisp.org/quicklisp.lisp
