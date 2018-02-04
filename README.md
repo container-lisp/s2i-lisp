@@ -46,6 +46,13 @@ forwarding, as above, but if you run this container by hand you will
 want to use the docker `--net host` option to allow for connections to
 swank.
 
+To install this image along with sample application template into OpenShift, run the following as the cluster manager:
+
+    ```
+    $ oc create -f lisp-image-streams.json -n openshift
+    $ oc create -f lisp-web-basic-s2i.json -n openshift
+    ```
+
 Environment variables
 ---------------------
 

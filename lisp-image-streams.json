@@ -1,0 +1,45 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "lisp-image-streams",
+        "annotations": {
+            "description": "ImageStream definitions for Commons Lisp app foundations.",
+            "openshift.io/provider-display-name": "Anthony Green"
+        }
+    },
+    "items": [
+        {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "s2i-lisp",
+                "annotations": {
+                    "openshift.io/display-name": "SBCL",
+                    "openshift.io/provider-display-name": "Anthony Green"
+                }
+            },
+            "spec": {
+                "tags": [
+                    {
+                        "name": "latest",
+                        "annotations": {
+                            "openshift.io/display-name": "SBCL",
+                            "description": "Build and run Common Lisp applications using Quicklisp and SBCL.",
+                            "iconClass": "icon-rh-openjdk",
+                            "tags": "builder,lisp,commonlisp,hidden",
+                            "supports": "commonlisp",
+                            "sampleRepo": "https://github.com/atgreen/sample-lisp-app",
+                            "sampleContextDir": "",
+                            "version": "latest"
+                        },
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "atgreen/s2i-lisp"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
