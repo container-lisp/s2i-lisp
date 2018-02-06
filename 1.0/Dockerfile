@@ -24,12 +24,13 @@ RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 
 ENV HOME /opt/app-root
-RUN mkdir -p /opt/app-root && chown -R 1001:1001 /opt/app-root
+RUN mkdir -p /opt/app-root
 USER 1001
 WORKDIR /opt/app-root
 RUN wget http://beta.quicklisp.org/quicklisp.lisp
 ADD install.lisp /opt/app-root/install.lisp
 RUN sbcl --non-interactive --load install.lisp
+RUN chmod -R go+rw /opt/app-root
 
 # Set the default CMD to print the usage of the language image
 CMD $STI_SCRIPTS_PATH/usage
