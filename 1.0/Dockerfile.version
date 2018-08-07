@@ -35,3 +35,4 @@ USER 1001
 
 # Set the default CMD to print the usage of the language image
 CMD $STI_SCRIPTS_PATH/usage
+LABEL io.openshift.builder-version="d533ef13eb88c2f761f0d29c9ca7f56e9596bd9f"
