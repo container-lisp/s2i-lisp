@@ -26,7 +26,7 @@ ENV HOME /opt/app-root
 #RUN chown -R 1001:0 /opt/app-root
 #USER 1001
 WORKDIR /opt/app-root
-RUN wget http://beta.quicklisp.org/quicklisp.lisp
+RUN wget https://beta.quicklisp.org/quicklisp.lisp
 ADD install.lisp /opt/app-root/install.lisp
 RUN sbcl --non-interactive --load install.lisp
 

@@ -27,7 +27,7 @@ COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 ENV HOME /opt/app-root
 RUN mkdir -p /opt/app-root
 WORKDIR /opt/app-root
-RUN wget http://beta.quicklisp.org/quicklisp.lisp
+RUN wget https://beta.quicklisp.org/quicklisp.lisp
 ADD install.lisp /opt/app-root/install.lisp
 RUN sbcl --non-interactive --load install.lisp
 RUN chown -R 1001:1001 /opt/app-root && chmod -R go+rw /opt/app-root
