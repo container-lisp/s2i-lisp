@@ -27,7 +27,7 @@ ENV HOME /opt/app-root
 #USER 1001
 WORKDIR /opt/app-root
 RUN wget https://beta.quicklisp.org/quicklisp.lisp
-ADD install.lisp /opt/app-root/install.lisp
+COPY install.lisp /opt/app-root/install.lisp
 RUN sbcl --non-interactive --load install.lisp
 
 # Set the default CMD to print the usage of the language image
