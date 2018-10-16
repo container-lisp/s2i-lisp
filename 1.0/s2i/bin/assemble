@@ -8,8 +8,7 @@ SBCL_OPTS=(
 
 echo "---> Installing application source ..."
 whoami
-touch ./a-file
-mkdir -p ./quicklisp/local-projects/${APP_SYSTEM_NAME}
+mkdir -vp ./quicklisp/local-projects/${APP_SYSTEM_NAME}
 cp -Rf /tmp/src/. ./quicklisp/local-projects/${APP_SYSTEM_NAME}
 
 echo "---> Building your Common Lisp application from source ..."
@@ -22,15 +21,4 @@ SBCL_OPTS=(
 echo sbcl "${SBCL_OPTS[@]}"
 sbcl "${SBCL_OPTS[@]}"
 
-find ./quicklisp
-
 chown -R 1001 ./quicklisp
-
-echo "==============================================================="
-echo "==============================================================="
-echo "==============================================================="
-echo "==============================================================="
-echo "==============================================================="
-echo "==============================================================="
-
-find ./quicklisp
