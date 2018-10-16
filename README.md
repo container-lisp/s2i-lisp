@@ -70,6 +70,13 @@ file inside your source code repository.
     SBCL evaluates this lisp form after ql:quickload'ing
     :$APP_SYSTEM_NAME.  For instance: "(webapp:start-webapp)".
 
+* **APP_MEM**
+
+    This value will be passed to sbcl via --dynamic-space-size and
+    should be set to the amount of memory the application needs. It
+    will be used for both building the image as well as running it.
+    Its default value is 256M.
+
 * **DEV_BACKEND**
 
     The default development environment backend that will be started
