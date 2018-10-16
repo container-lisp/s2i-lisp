@@ -4,13 +4,21 @@
 
 (quicklisp-quickstart:install :path "/opt/app-root/quicklisp/" :dist-url *dist-url*)
 
-; Pre-load/compile useful content...
-(ql:quickload :hunchentoot)
+;; Pre-load/compile slynk and swank
 (ql:quickload :swank)
+(ql:quickload :slynk)
 
 (with-open-file (out "/opt/app-root/.sbclrc" :direction :output)
-  (format out "(load \"/opt/app-root/quicklisp\/setup.lisp\")")
-  (format out "(ql:quickload :swank)")
-  (format out "(swank:create-server :port 4005 :dont-close t)"))
-
-
+  (format out "
+  (load \"/opt/app-root/quicklisp\/setup.lisp\")
+  (let ((backend (sb-ext:posix-getenv \"DEV_BACKEND\"))
+        (backend-port (sb-ext:posix-getenv \"DEV_BACKEND_PORT\")))
+    (setq backend-port
+          (if backend-port
+              (parse-integer (remove #\\\" backend-port))
+              4005))
+    (when backend
+      (ql:quickload backend)
+      (setq backend (string-upcase backend))
+      (funcall (find-symbol \"CREATE-SERVER\" (find-package backend))
+               :port backend-port :dont-close t)))~%"))

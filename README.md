@@ -43,6 +43,11 @@ forwarding, as above, but if you run this container by hand you will
 want to use the docker `--net host` option to allow for connections to
 swank.
 
+Also note that instead of using sly, you can also decide to use
+slime, the traditional emacs common lisp development environment.
+See below the section about environment variable DEV_ENV on how
+to do this.
+
 To install this image along with sample application template into OpenShift, run the following as the cluster manager:
 
     ```
@@ -65,4 +70,17 @@ file inside your source code repository.
     SBCL evaluates this lisp form after ql:quickload'ing
     :$APP_SYSTEM_NAME.  For instance: "(webapp:start-webapp)".
 
+* **DEV_BACKEND**
 
+    The default development environment backend that will be started
+    is sly, but you can also use slime. This variable can be set to
+    "slynk" or "swank", but if it is unset, no backend will be started
+    at all.
+
+* **DEV_BACKEND_PORT**
+
+    The default slynk/swank port is 4005. Set this value to something
+    else for your application to use a different port (e.g. if your
+    application needs to use this port). This setting will only come
+    into effect when a development backend has been selected via
+    DEV_ENV.
