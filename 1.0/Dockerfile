@@ -18,7 +18,7 @@ LABEL io.k8s.description="Platform for building and running Common Lisp applicat
 
 RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     yum update -y && \
-    yum install -y sbcl && \
+    yum install -y sbcl libev libev-devel libuv libuv-devel && \
     yum clean all -y
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
