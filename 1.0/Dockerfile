@@ -16,10 +16,11 @@ LABEL io.k8s.description="Platform for building and running Common Lisp applicat
       io.openshift.tags="builder,cl,lisp,sbcl" \
       io.openshift.s2i.scripts-url=image://$STI_SCRIPTS_PATH
 
-RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-    yum update -y && \
-    yum install -y sbcl libev libev-devel libuv libuv-devel && \
-    yum clean all -y
+RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && yum update -y
+
+RUN yum install -y libev libev-devel libuv libuv-devel && \
+    yum clean all -y && \
+    rpm -ivh http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic/sbcl-1.4.12-alt1.x86_64.rpm
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH
