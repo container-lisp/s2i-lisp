@@ -16,11 +16,10 @@ LABEL io.k8s.description="Platform for building and running Common Lisp applicat
       io.openshift.tags="builder,cl,lisp,sbcl" \
       io.openshift.s2i.scripts-url=image://$STI_SCRIPTS_PATH
 
-RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && yum update -y
-
-RUN yum install -y libev libev-devel libuv libuv-devel && \
+RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
+    yum update -y && \
+    yum install -y libev libev-devel libuv libuv-devel && \
     yum clean all -y && \
-    rpm -ivh http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic/sbcl-1.4.12-alt1.x86_64.rpm && \
     localedef -i en_US -c -f UTF-8 en_US.UTF-8
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
@@ -31,12 +30,12 @@ ENV HOME=/opt/app-root \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8
 
-RUN mkdir -p /opt/app-root
 WORKDIR /opt/app-root
-RUN wget https://beta.quicklisp.org/quicklisp.lisp
+RUN rpm -ivh http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic/sbcl-1.4.12-alt1.x86_64.rpm && \
+    wget https://beta.quicklisp.org/quicklisp.lisp
 COPY install.lisp /opt/app-root/install.lisp
-RUN sbcl --non-interactive --load install.lisp
-RUN chown -R 1001:1001 /opt/app-root && chmod -R go+rw /opt/app-root
+RUN sbcl --non-interactive --load install.lisp && \
+    chown -R 1001:1001 /opt/app-root && chmod -R go+rw /opt/app-root
 USER 1001
 
 # Set the default CMD to print the usage of the language image
