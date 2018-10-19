@@ -12,11 +12,18 @@ mkdir -vp ./quicklisp/local-projects/${APP_SYSTEM_NAME}
 cp -Rf /tmp/src/. ./quicklisp/local-projects/${APP_SYSTEM_NAME}
 
 echo "---> Building your Common Lisp application from source ..."
-SBCL_OPTS=(
-    "${SBCL_OPTS[@]}"
-    --eval "(ql:quickload :$(eval echo ${APP_SYSTEM_NAME}))"
-    --eval "(quit)"
-)
+if [ -n "${APP_BUILD_SCRIPT}" ]; then
+    SBCL_OPTS=(
+        "${SBCL_OPTS[@]}"
+        --load "$(eval echo ${APP_BUILD_SCRIPT})"
+    )
+else
+    SBCL_OPTS=(
+        "${SBCL_OPTS[@]}"
+        --eval "(ql:quickload :$(eval echo ${APP_SYSTEM_NAME}))"
+        --eval "(quit)"
+    )
+fi
 
 echo sbcl "${SBCL_OPTS[@]}"
 sbcl "${SBCL_OPTS[@]}"

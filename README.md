@@ -78,6 +78,14 @@ file inside your source code repository.
     quickloading the application but thus gives full control over the
     startup process.
 
+* **APP_BUILD_SCRIPT**
+
+    SBCL loads this script and executes it during the build process.
+    If this is used, :$APP_EVAL and $APP_SYSTEM_NAME will not be used
+    for quickloading and building the app. Instead, the script
+    specified needs to take care of setting up and quickloading the
+    application but thus gives more control over the build process.
+
 * **APP_MEM**
 
     This value will be passed to sbcl via --dynamic-space-size and
