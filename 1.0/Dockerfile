@@ -31,10 +31,16 @@ ENV HOME=/opt/app-root \
     LANGUAGE=en_US.UTF-8
 
 WORKDIR /opt/app-root
-RUN rpm -ivh http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic/sbcl-1.4.12-alt1.x86_64.rpm && \
-    wget https://beta.quicklisp.org/quicklisp.lisp
 COPY install.lisp /opt/app-root/install.lisp
-RUN sbcl --non-interactive --load install.lisp && \
+RUN yum install -y centos-release-scl && \
+    yum install -y devtoolset-7-gcc* && \
+    yum clean all -y && \
+    scl enable devtoolset-7 bash && \
+    source scl_source enable devtoolset-7 && \
+    gcc --version && \
+    rpm -ivh http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic/sbcl-1.4.12-alt1.x86_64.rpm && \
+    wget https://beta.quicklisp.org/quicklisp.lisp && \
+    sbcl --non-interactive --load install.lisp && \
     chown -R 1001:1001 /opt/app-root && chmod -R go+rw /opt/app-root
 USER 1001
 

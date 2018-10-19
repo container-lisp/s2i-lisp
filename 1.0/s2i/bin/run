@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source scl_source enable devtoolset-7
+
 if [ -n "$APP_SCRIPT" ]; then
     PROJECT_PATH=./quicklisp/local-projects/${APP_SYSTEM_NAME}
     SBCL_OPTS=(

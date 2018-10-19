@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source scl_source enable devtoolset-7
+
 set -e
 
 SBCL_OPTS=(
