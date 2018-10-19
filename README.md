@@ -68,7 +68,15 @@ file inside your source code repository.
 * **APP_EVAL**
 
     SBCL evaluates this lisp form after ql:quickload'ing
-    :$APP_SYSTEM_NAME.  For instance: "(webapp:start-webapp)".
+    :$APP_SYSTEM_NAME, e.g. "(webapp:start-webapp)". This only happens
+    when :$APP_SCRIPT is not used.
+
+* **APP_SCRIPT**
+
+    SBCL loads this script and executes it instead of evaluating
+    :$APP_EVAL. This script needs to take care of setting up and
+    quickloading the application but thus gives full control over the
+    startup process.
 
 * **APP_MEM**
 

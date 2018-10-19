@@ -1,10 +1,18 @@
 #!/bin/bash
 
-SBCL_OPTS=(
-    "${SBCL_OPTS[@]}"
-    --dynamic-space-size "${APP_MEM-256}"
-    --eval "(ql:quickload :$(eval echo ${APP_SYSTEM_NAME}))"
-    --eval "$(eval echo ${APP_EVAL})"
-)
+if [ -n "$APP_SCRIPT" ]; then
+    SBCL_OPTS=(
+        "${SBCL_OPTS[@]}"
+        --dynamic-space-size "${APP_MEM-256}"
+        --load "$(eval echo ${APP_SCRIPT})"
+    )
+else
+    SBCL_OPTS=(
+        "${SBCL_OPTS[@]}"
+        --dynamic-space-size "${APP_MEM-256}"
+        --eval "(ql:quickload :$(eval echo ${APP_SYSTEM_NAME}))"
+        --eval "$(eval echo ${APP_EVAL})"
+    )
+fi
 
 sbcl "${SBCL_OPTS[@]}"
