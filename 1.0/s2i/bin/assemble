@@ -8,14 +8,16 @@ SBCL_OPTS=(
 
 echo "---> Installing application source ..."
 whoami
-mkdir -vp ./quicklisp/local-projects/${APP_SYSTEM_NAME}
-cp -Rf /tmp/src/. ./quicklisp/local-projects/${APP_SYSTEM_NAME}
+PROJECT_PATH=./quicklisp/local-projects/${APP_SYSTEM_NAME}
+
+mkdir -vp "${PROJECT_PATH}"
+cp -Rf /tmp/src/. "${PROJECT_PATH}"
 
 echo "---> Building your Common Lisp application from source ..."
 if [ -n "${APP_BUILD_SCRIPT}" ]; then
     SBCL_OPTS=(
         "${SBCL_OPTS[@]}"
-        --load "$(eval echo ${APP_BUILD_SCRIPT})"
+        --load "${PROJECT_PATH}/$(eval echo ${APP_BUILD_SCRIPT})"
     )
 else
     SBCL_OPTS=(

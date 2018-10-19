@@ -1,10 +1,11 @@
 #!/bin/bash
 
 if [ -n "$APP_SCRIPT" ]; then
+    PROJECT_PATH=./quicklisp/local-projects/${APP_SYSTEM_NAME}
     SBCL_OPTS=(
         "${SBCL_OPTS[@]}"
         --dynamic-space-size "${APP_MEM-256}"
-        --load "$(eval echo ${APP_SCRIPT})"
+        --load "${PROJECT_PATH}/$(eval echo ${APP_SCRIPT})"
     )
 else
     SBCL_OPTS=(

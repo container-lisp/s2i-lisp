@@ -76,7 +76,9 @@ file inside your source code repository.
     SBCL loads this script and executes it instead of evaluating
     :$APP_EVAL. This script needs to take care of setting up and
     quickloading the application but thus gives full control over the
-    startup process.
+    startup process. Note that this variable should point to a
+    relative path, which will be within the quicklisp project defined
+    by APP_SYSTEM_NAME, e.g. ".s2i/run.lisp".
 
 * **APP_BUILD_SCRIPT**
 
@@ -84,7 +86,10 @@ file inside your source code repository.
     If this is used, :$APP_EVAL and $APP_SYSTEM_NAME will not be used
     for quickloading and building the app. Instead, the script
     specified needs to take care of setting up and quickloading the
-    application but thus gives more control over the build process.
+    application but thus gives more control over the build
+    process. Note that this variable should point to a relative path,
+    which will be within the quicklisp project defined by
+    APP_SYSTEM_NAME, e.g. ".s2i/build.lisp".
 
 * **APP_MEM**
 
