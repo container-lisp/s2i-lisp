@@ -1,13 +1,24 @@
 [![Build Status](https://travis-ci.org/hjudt/s2i-lisp.svg?branch=master)](https://travis-ci.org/hjudt/s2i-lisp)
 
 Common Lisp + Quicklisp OpenShift Build Image
-==============================================
+=============================================
 
-This repository contains the source for building a Quicklisp based Common Lisp application as a reproducible docker image using [source-to-image](https://github.com/openshift/source-to-image). This docker image is CentOS based, but the project includes Dockerfile.rhel7 for creating a RHEL based image as well.  The resulting images can be run using [docker](http://docker.io).
+This repository contains the source for building a Quicklisp based
+Common Lisp application as a reproducible docker image using
+[source-to-image](https://github.com/openshift/source-to-image). This
+docker image is CentOS based, but the project includes
+Dockerfile.rhel7 for creating a RHEL based image as well. The
+resulting images can be run using [docker](http://docker.io).
 
+This project has been forked from Anthony Green's wonderful s2i-lisp
+project, available at https://github.com/atgreen/s2i-lisp. Most parts
+have been altered to increase configurability and versatility and to
+provide an up-to-date common lisp development experience. Note that
+only the CentOS Dockerfile is actually maintained, the RHEL based
+image lacks many of the modifications done to the CentOS image.
 
 Usage
----------------------
+-----
 To build a simple [sample-lisp-app](https://github.com/hjudt/sample-lisp-app) application using standalone [S2I](https://github.com/openshift/source-to-image) and then run the resulting image with [docker](http://docker.io) execute:
 
     ```
