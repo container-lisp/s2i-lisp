@@ -74,7 +74,10 @@ file inside your source code repository.
 
 * **APP_SYSTEM_NAME**
 
-    The name that quicklisp will know this application by.
+    The name that quicklisp will know this application by and which
+    will become the name of the directory in the quicklisp
+    local-project subdirectory, where the application source code will
+    be copied into and build and run from.
 
 * **APP_EVAL**
 
@@ -111,10 +114,8 @@ file inside your source code repository.
 
 * **DEV_BACKEND**
 
-    The default development environment backend that will be started
-    is sly, but you can also use slime. This variable can be set to
-    "slynk" or "swank", but if it is unset, no backend will be started
-    at all.
+    Set this variable to slynk or swank to choose the development
+    backend to start, or leave it unset to start no backend at all.
 
 * **DEV_BACKEND_PORT**
 
