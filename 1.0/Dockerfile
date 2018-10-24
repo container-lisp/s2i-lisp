@@ -28,20 +28,24 @@ COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 ENV HOME=/opt/app-root \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
-    LANGUAGE=en_US.UTF-8
+    LANGUAGE=en_US.UTF-8 \
+    BASH_ENV=/opt/app-root/etc/scl_enable \
+    ENV=/opt/app-root/etc/scl_enable \
+    PROMPT_COMMAND=". /opt/app-root/etc/scl_enable" \
+    PATH=/opt/app-root/src/bin:/opt/app-root/bin:/opt/rh/devtoolset-7/root/usr/bin/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 WORKDIR /opt/app-root
-COPY install.lisp /opt/app-root/install.lisp
+COPY ./root/ /
 RUN yum install -y centos-release-scl && \
     yum install -y devtoolset-7-gcc* && \
     yum clean all -y && \
     scl enable devtoolset-7 bash && \
-    source scl_source enable devtoolset-7 && \
     gcc --version && \
     rpm -ivh http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic/sbcl-1.4.12-alt1.x86_64.rpm && \
     wget https://beta.quicklisp.org/quicklisp.lisp && \
     sbcl --non-interactive --load install.lisp && \
-    chown -R 1001:1001 /opt/app-root && chmod -R go+rw /opt/app-root
+    chown -R 1001:1001 /opt/app-root && \
+    chmod -R go+rw /opt/app-root
 USER 1001
 
 # Set the default CMD to print the usage of the language image
