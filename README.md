@@ -39,9 +39,11 @@ $ oc new-app hjudt/lisp-10-centos7~git://github.com/hjudt/sample-lisp-app
 ```
 
 A [slynk](https://github.com/joaotavora/sly) server will be started on port 4005 for every application.  With OpenShift, you can forward port 4005 to your local host and connect to it with [SLY](https://github.com/joaotavora/sly) for interactive [Emacs](https://www.gnu.org/software/emacs/) based development.  Just identify the pod running your container with `oc get pods`, and then....
+
 ```oc port-forward sample-lisp-app-1-h5o5f 4005```
 
 Follow this up in Emacs with...
+
 ```M-x sly-connect RET RET```
 
 To teach Emacs how to translate filenames between the remote and local machines, you'll need to define [```sly-filename-translations```](http://joaotavora.github.io/sly/#Setting-up-pathname-translations)."
