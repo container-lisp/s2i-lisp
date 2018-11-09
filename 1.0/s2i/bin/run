@@ -16,4 +16,11 @@ else
     )
 fi
 
-sbcl "${SBCL_OPTS[@]}"
+
+trap 'kill -TERM $PID' TERM
+sbcl "${SBCL_OPTS[@]}" &
+PID=$!
+wait $PID
+trap - TERM
+wait $PID
+exit $?
