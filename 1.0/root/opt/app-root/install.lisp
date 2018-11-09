@@ -10,6 +10,7 @@
 
 (with-open-file (out "/opt/app-root/.sbclrc" :direction :output)
   (format out "
+  (setf sb-ext:*exit-timeout* 15)
   (load \"/opt/app-root/quicklisp\/setup.lisp\")
   (let ((backend (sb-ext:posix-getenv \"DEV_BACKEND\"))
         (backend-port (sb-ext:posix-getenv \"DEV_BACKEND_PORT\")))
