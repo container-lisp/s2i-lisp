@@ -44,6 +44,7 @@ RUN yum install -y centos-release-scl && \
     rpm -ivh http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic/sbcl-1.4.12-alt1.x86_64.rpm && \
     rpm -ivh http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic/libev4-4.24-alt1.x86_64.rpm && \
     rpm -ivh http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic/libev-devel-4.24-alt1.x86_64.rpm && \
+    rm -rf /var/cache/yum && \
     wget https://beta.quicklisp.org/quicklisp.lisp && \
     sbcl --non-interactive --load install.lisp && \
     chown -R 1001:1001 /opt/app-root && \
