@@ -33,22 +33,29 @@ ENV HOME=/opt/app-root \
     PROMPT_COMMAND=". /opt/app-root/etc/scl_enable" \
     PATH=/opt/app-root/src/bin:/opt/app-root/bin:/opt/rh/devtoolset-7/root/usr/bin/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-WORKDIR /opt/app-root
-COPY ./root/ /
 RUN yum install -y centos-release-scl && \
     yum install -y devtoolset-7-gcc* && \
     yum install -y libuv libuv-devel && \
     yum clean all -y && \
     scl enable devtoolset-7 bash && \
     gcc --version && \
-    rpm -ivh http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic/sbcl-1.4.12-alt1.x86_64.rpm && \
     rpm -ivh http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic/libev4-4.24-alt1.x86_64.rpm && \
     rpm -ivh http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic/libev-devel-4.24-alt1.x86_64.rpm && \
-    rm -rf /var/cache/yum && \
+    rm -rf /var/cache/yum
+
+WORKDIR /opt/app-root
+COPY ./root/ /
+
+RUN wget --progress=bar:force "https://downloads.sourceforge.net/project/sbcl/sbcl/1.4.13/sbcl-1.4.13-x86-64-linux-binary.tar.bz2" && \
+    tar -xvf sbcl-1.4.13-x86-64-linux-binary.tar.bz2 && \
+    cd sbcl-1.4.13-x86-64-linux && \
+    ./install.sh && \
+    cd .. && rm -rf sbcl-1.4.13-x86-64-linux-binary.tar.bz2 sbcl-1.4.13-x86-64-linux && \
     wget https://beta.quicklisp.org/quicklisp.lisp && \
     sbcl --non-interactive --load install.lisp && \
     chown -R 1001:1001 /opt/app-root && \
     chmod -R go+rw /opt/app-root
+
 USER 1001
 
 # Set the default CMD to print the usage of the language image
