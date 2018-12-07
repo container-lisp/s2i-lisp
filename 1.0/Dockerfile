@@ -46,11 +46,11 @@ RUN yum install -y centos-release-scl && \
 WORKDIR /opt/app-root
 COPY ./root/ /
 
-RUN wget --progress=bar:force "https://downloads.sourceforge.net/project/sbcl/sbcl/1.4.13/sbcl-1.4.13-x86-64-linux-binary.tar.bz2" && \
-    tar -xvf sbcl-1.4.13-x86-64-linux-binary.tar.bz2 && \
-    cd sbcl-1.4.13-x86-64-linux && \
+RUN wget --progress=bar:force "https://downloads.sourceforge.net/project/sbcl/sbcl/1.4.14/sbcl-1.4.14-x86-64-linux-binary.tar.bz2" && \
+    tar -xvf sbcl-1.4.14-x86-64-linux-binary.tar.bz2 && \
+    cd sbcl-1.4.14-x86-64-linux && \
     ./install.sh && \
-    cd .. && rm -rf sbcl-1.4.13-x86-64-linux-binary.tar.bz2 sbcl-1.4.13-x86-64-linux && \
+    cd .. && rm -rf sbcl-1.4.14-x86-64-linux-binary.tar.bz2 sbcl-1.4.14-x86-64-linux && \
     wget https://beta.quicklisp.org/quicklisp.lisp && \
     sbcl --non-interactive --load install.lisp && \
     chown -R 1001:1001 /opt/app-root && \
