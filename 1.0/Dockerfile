@@ -1,10 +1,9 @@
 FROM openshift/base-centos7
-#FROM registry.access.redhat.com/rhel7-atomic
 
 # This image provides a Common Lisp environment based on QuickLisp and
 # that you can use to run your Common Lisp applications.
 
-MAINTAINER Harald Judt <hjudt@gmx.at>
+MAINTAINER The container-lisp hackers @ github.com/container-lisp
 
 EXPOSE 8080
 
