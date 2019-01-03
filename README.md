@@ -92,39 +92,39 @@ repository.
 * **APP_EVAL**
 
     SBCL evaluates this lisp form after ql:quickload'ing
-    :$APP_SYSTEM_NAME, e.g. "(webapp:start-webapp)". This only happens
-    when :$APP_SCRIPT is not used.
+    `:$APP_SYSTEM_NAME`, e.g. "`(webapp:start-webapp)`". This only happens
+    when `:$APP_SCRIPT` is not used.
 
 * **APP_SCRIPT**
 
     SBCL loads this script and executes it instead of evaluating
-    :$APP_EVAL. This script needs to take care of setting up and
+    `:$APP_EVAL`. This script needs to take care of setting up and
     quickloading the application but thus gives full control over the
     startup process. Note that this variable should point to a
     relative path, which will be within the quicklisp project defined
-    by APP_SYSTEM_NAME, e.g. ".s2i/run.lisp".
+    by `APP_SYSTEM_NAME`, e.g. "`.s2i/run.lisp`".
 
 * **APP_BUILD_SCRIPT**
 
     SBCL loads this script and executes it during the build process.
-    If this is used, :$APP_EVAL and $APP_SYSTEM_NAME will not be used
+    If this is used, `:$APP_EVAL` and `$APP_SYSTEM_NAME` will not be used
     for quickloading and building the app. Instead, the script
     specified needs to take care of setting up and quickloading the
     application but thus gives more control over the build
     process. Note that this variable should point to a relative path,
     which will be within the quicklisp project defined by
-    APP_SYSTEM_NAME, e.g. ".s2i/build.lisp".
+    `APP_SYSTEM_NAME`, e.g. "`.s2i/build.lisp`".
 
 * **APP_MEM**
 
-    This value will be passed to sbcl via --dynamic-space-size and
+    This value will be passed to sbcl via `--dynamic-space-size` and
     should be set to the amount of memory the application needs. It
     will be used for both building the image as well as running it.
     Its default value is 256M.
 
 * **DEV_BACKEND**
 
-    Set this variable to slynk or swank to choose the development
+    Set this variable to `slynk` or `swank` to choose the development
     backend to start, or leave it unset to start no backend at all.
 
 * **DEV_BACKEND_PORT**
@@ -133,4 +133,4 @@ repository.
     else for your application to use a different port (e.g. if your
     application needs to use this port). This setting will only come
     into effect when a development backend has been selected via
-    DEV_ENV.
+    `DEV_ENV`.
