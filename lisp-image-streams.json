@@ -5,7 +5,7 @@
         "name": "lisp-image-streams",
         "annotations": {
             "description": "ImageStream definitions for Commons Lisp app foundations.",
-            "openshift.io/provider-display-name": "Harald Judt"
+            "openshift.io/provider-display-name": "The container-lisp hackers"
         }
     },
     "items": [
@@ -16,7 +16,7 @@
                 "name": "s2i-lisp",
                 "annotations": {
                     "openshift.io/display-name": "SBCL",
-                    "openshift.io/provider-display-name": "Harald Judt"
+                    "openshift.io/provider-display-name": "The container-lisp hackers"
                 }
             },
             "spec": {

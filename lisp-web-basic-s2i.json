@@ -7,7 +7,7 @@
             "tags": "lisp",
             "version": "1.0.0",
             "openshift.io/display-name": "Lisp",
-            "openshift.io/provider-display-name": "Harald Judt",
+            "openshift.io/provider-display-name": "The container-lisp hackers",
             "description": "An example Lisp web application using SBCL.",
             "template.openshift.io/long-description": "This template defines resources needed to develop Common Lisp based web applications."
         },
