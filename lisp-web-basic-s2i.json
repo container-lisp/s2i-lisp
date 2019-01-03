@@ -36,7 +36,7 @@
             "description": "Git source URI for application",
             "displayName": "Git Repository URL",
             "name": "SOURCE_REPOSITORY_URL",
-            "value": "https://github.com/hjudt/sample-lisp-app",
+            "value": "https://github.com/container-lisp/sample-lisp-app",
             "required": true
         },
         {

@@ -29,13 +29,13 @@
                             "iconClass": "icon-rh-openjdk",
                             "tags": "builder,lisp,commonlisp,hidden",
                             "supports": "commonlisp",
-                            "sampleRepo": "https://github.com/hjudt/sample-lisp-app",
+                            "sampleRepo": "https://github.com/container-lisp/sample-lisp-app",
                             "sampleContextDir": "",
                             "version": "latest"
                         },
                         "from": {
                             "kind": "DockerImage",
-                            "name": "hjudt/s2i-lisp"
+                            "name": "containerlisp/s2i-lisp"
                         }
                     }
                 ]

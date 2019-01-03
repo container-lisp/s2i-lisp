@@ -65,14 +65,14 @@ for dir in ${dirs}; do
     *\ ${dir}\ *) ;;
     *)
       if [ "${OS}" == "centos7" ]; then
-        NAMESPACE="hjudt/"
+        NAMESPACE="containerlisp/"
       else
         # we don't test rhel versions of SCL owned images
         if [[ "${SKIP_RHEL_SCL}" == "1" ]]; then
           echo "Skipping rhel scl image ${BASE_IMAGE_NAME}-${dir//./}-{$OS}"
           continue
         fi
-        NAMESPACE="hjudt/"
+        NAMESPACE="containerlisp/"
       fi
   esac
 
