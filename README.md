@@ -10,19 +10,16 @@ docker image is CentOS based, but the project includes
 Dockerfile.rhel7 for creating a RHEL based image as well. The
 resulting images can be run using [docker](http://docker.io).
 
-This project has been forked from Anthony Green's wonderful s2i-lisp
-project, available at https://github.com/atgreen/s2i-lisp. Most parts
-have been altered to increase configurability and versatility and to
-provide an up-to-date common lisp development experience. Note that
-only the CentOS Dockerfile is actually maintained, the RHEL based
-image lacks many of the modifications done to the CentOS image.
-
 Usage
 -----
-To build a simple [sample-lisp-app](https://github.com/hjudt/sample-lisp-app) application using standalone [S2I](https://github.com/openshift/source-to-image) and then run the resulting image with [docker](http://docker.io) execute:
+To build a simple
+[sample-lisp-app](https://github.com/container-lisp/sample-lisp-app)
+application using standalone
+[S2I](https://github.com/openshift/source-to-image) and then run the
+resulting image with [docker](http://docker.io) execute:
 
     ```
-    $ s2i build https://github.com/hjudt/sample-lisp-app hjudt/lisp-10-centos7 sample-lisp-app
+    $ s2i build https://github.com/container-lisp/sample-lisp-app containerlisp/lisp-10-centos7 sample-lisp-app
     $ docker run -p 8080:8080 sample-lisp-app
     ```
 
@@ -35,10 +32,16 @@ $ curl 127.0.0.1:8080
 
 You will likely, however, prefer [OpenShift](https://www.openshift.com), where applications are created like so:
 ```
-$ oc new-app hjudt/lisp-10-centos7~git://github.com/hjudt/sample-lisp-app
+$ oc new-app containerlisp/lisp-10-centos7~git://github.com/container-lisp/sample-lisp-app
 ```
 
-A [slynk](https://github.com/joaotavora/sly) server will be started on port 4005 for every application.  With OpenShift, you can forward port 4005 to your local host and connect to it with [SLY](https://github.com/joaotavora/sly) for interactive [Emacs](https://www.gnu.org/software/emacs/) based development.  Just identify the pod running your container with `oc get pods`, and then....
+A [slynk](https://github.com/joaotavora/sly) server will be started on
+port 4005 for every application.  With OpenShift, you can forward port
+4005 to your local host and connect to it with
+[SLY](https://github.com/joaotavora/sly) for interactive
+[Emacs](https://www.gnu.org/software/emacs/) based development.  Just
+identify the pod running your container with `oc get pods`, and
+then....
 
 ```oc port-forward sample-lisp-app-1-h5o5f 4005```
 
@@ -46,9 +49,13 @@ Follow this up in Emacs with...
 
 ```M-x sly-connect RET RET```
 
-To teach Emacs how to translate filenames between the remote and local machines, you'll need to define [```sly-filename-translations```](http://joaotavora.github.io/sly/#Setting-up-pathname-translations)."
+To teach Emacs how to translate filenames between the remote and local
+machines, you'll need to define
+[```sly-filename-translations```](http://joaotavora.github.io/sly/#Setting-up-pathname-translations)."
 
-There are a number of excellent screencasts and tutorials on using SLY on the project web site at [https://github.com/joaotavora/sly](https://github.com/joaotavora/sly).
+There are a number of excellent screencasts and tutorials on using SLY
+on the project web site at
+[https://github.com/joaotavora/sly](https://github.com/joaotavora/sly).
 
 Note that slynk, by default, is configured to only listen on the
 localhost loopback device.  This works well with OpenShift port
@@ -71,8 +78,9 @@ To install this image along with sample application template into OpenShift, run
 Environment variables
 ---------------------
 
-To set these environment variables, you can place them as a key value pair into a `.s2i/environment`
-file inside your source code repository.
+To set these environment variables, you can place them as a key value
+pair into a `.s2i/environment` file inside your source code
+repository.
 
 * **APP_SYSTEM_NAME**
 
