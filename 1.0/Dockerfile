@@ -29,6 +29,7 @@ ENV HOME=/opt/app-root \
     LANGUAGE=en_US.UTF-8 \
     BASH_ENV=/opt/app-root/etc/scl_enable \
     ENV=/opt/app-root/etc/scl_enable \
+    SBCL_VERSION=1.4.15 \
     PROMPT_COMMAND=". /opt/app-root/etc/scl_enable" \
     PATH=/opt/app-root/src/bin:/opt/app-root/bin:/opt/rh/devtoolset-7/root/usr/bin/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
@@ -45,11 +46,11 @@ RUN yum install -y centos-release-scl && \
 WORKDIR /opt/app-root
 COPY ./root/ /
 
-RUN wget --progress=bar:force "https://downloads.sourceforge.net/project/sbcl/sbcl/1.4.15/sbcl-1.4.15-x86-64-linux-binary.tar.bz2" && \
-    tar -xvf sbcl-1.4.15-x86-64-linux-binary.tar.bz2 && \
-    cd sbcl-1.4.15-x86-64-linux && \
+RUN wget --progress=bar:force "https://downloads.sourceforge.net/project/sbcl/sbcl/${SBCL_VERSION}/sbcl-${SBCL_VERSION}-x86-64-linux-binary.tar.bz2" && \
+    tar -xvf sbcl-${SBCL_VERSION}-x86-64-linux-binary.tar.bz2 && \
+    cd sbcl-${SBCL_VERSION}-x86-64-linux && \
     ./install.sh && \
-    cd .. && rm -rf sbcl-1.4.15-x86-64-linux-binary.tar.bz2 sbcl-1.4.15-x86-64-linux && \
+    cd .. && rm -rf sbcl-${SBCL_VERSION}-x86-64-linux-binary.tar.bz2 sbcl-${SBCL_VERSION}-x86-64-linux && \
     wget https://beta.quicklisp.org/quicklisp.lisp && \
     sbcl --non-interactive --load install.lisp && \
     chown -R 1001:1001 /opt/app-root && \
