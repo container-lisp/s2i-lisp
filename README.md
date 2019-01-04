@@ -17,11 +17,10 @@ To build a simple
 application using standalone
 [S2I](https://github.com/openshift/source-to-image) and then run the
 resulting image with [docker](http://docker.io) execute:
-
-    ```
-    $ s2i build https://github.com/container-lisp/sample-lisp-app containerlisp/lisp-10-centos7 sample-lisp-app
-    $ docker run -p 8080:8080 sample-lisp-app
-    ```
+```
+$ s2i build https://github.com/container-lisp/sample-lisp-app containerlisp/lisp-10-centos7 sample-lisp-app
+$ docker run -p 8080:8080 sample-lisp-app
+```
 
 **Accessing the application:**
 
@@ -51,7 +50,7 @@ Follow this up in Emacs with...
 
 To teach Emacs how to translate filenames between the remote and local
 machines, you'll need to define
-[```sly-filename-translations```](http://joaotavora.github.io/sly/#Setting-up-pathname-translations)."
+[```sly-filename-translations```](http://joaotavora.github.io/sly/#Setting-up-pathname-translations).
 
 There are a number of excellent screencasts and tutorials on using SLY
 on the project web site at
@@ -65,11 +64,10 @@ swank.
 
 Also note that instead of using sly, you can also decide to use
 slime, the traditional emacs common lisp development environment.
-See below the section about environment variable DEV_ENV on how
+See below the section about environment variable `DEV_ENV` on how
 to do this.
 
 To install this image along with sample application template into OpenShift, run the following as the cluster manager:
-
     ```
     $ oc create -f lisp-image-streams.json -n openshift
     $ oc create -f lisp-web-basic-s2i.json -n openshift
