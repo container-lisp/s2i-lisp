@@ -68,10 +68,10 @@ See below the section about environment variable `DEV_ENV` on how
 to do this.
 
 To install this image along with sample application template into OpenShift, run the following as the cluster manager:
-    ```
-    $ oc create -f lisp-image-streams.json -n openshift
-    $ oc create -f lisp-web-basic-s2i.json -n openshift
-    ```
+```
+$ oc create -f lisp-image-streams.json -n openshift
+$ oc create -f lisp-web-basic-s2i.json -n openshift
+```
 
 Environment variables
 ---------------------
