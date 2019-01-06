@@ -2,6 +2,11 @@ sudo: required
 
 language: c
 
+env:
+  global:
+     - COMMIT=${TRAVIS_COMMIT::6}
+     - REPO=containerlisp/lisp-10-centos7
+
 services:
   - docker
 
@@ -15,6 +20,13 @@ script:
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-      docker push containerlisp/lisp-10-centos7;
+      TAG=$(date -d \
+            $(grep http://beta.quicklisp.org 1.0/root/opt/app-root/install.lisp \
+                   | awk -F'/' '{ print $6 }') \
+            +%Y%m%d).$TRAVIS_BUILD_NUMBER
+      docker images
+      docker tag $REPO:latest $REPO:$TAG
+      docker tag $REPO:latest $REPO:$COMMIT
+      docker push $REPO
     fi
   - echo All done.
