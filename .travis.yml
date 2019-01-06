@@ -20,11 +20,13 @@ script:
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-      TAG=$(date -d $(grep http://beta.quicklisp.org 1.0/root/opt/app-root/install.lisp | awk -F'/' '{ print $6 }') +%Y%m%d).$TRAVIS_BUILD_NUMBER;
-      docker tag $REPO:latest $REPO:$TAG;
+      QLTAG=$(date -d $(grep http://beta.quicklisp.org 1.0/root/opt/app-root/install.lisp | awk -F'/' '{ print $6 }') +%Y%m%d);
+      docker tag $REPO:latest $REPO:$QLTAG;
+      docker tag $REPO:latest $REPO:$QLTAG.$TRAVIS_BUILD_NUMBER;
       docker tag $REPO:latest $REPO:$COMMIT;
       docker push $REPO:latest;
-      docker push $REPO:$TAG;
+      docker push $REPO:$QLTAG;
+      docker push $REPO:$QLTAG.$TRAVIS_BUILD_NUMBER;
       docker push $REPO:$COMMIT;
     fi
   - echo All done.
