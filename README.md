@@ -148,7 +148,7 @@ The centos7-based S2I images are published on dockerhub, as
   bits may.
 
 * Git commit hash (eg. `b6ef12a`): The semantics of this tag are the
-  same as above. it is provided as a convenience in order to map back
+  same as above. It is provided as a convenience in order to map back
   to the original source version.
 
 * Quicklisp dist version date + travis-ci build number (eg. `20181210.26`):
