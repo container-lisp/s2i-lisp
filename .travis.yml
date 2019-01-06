@@ -23,10 +23,10 @@ after_success:
       TAG=$(date -d \
             $(grep http://beta.quicklisp.org 1.0/root/opt/app-root/install.lisp \
                    | awk -F'/' '{ print $6 }') \
-            +%Y%m%d).$TRAVIS_BUILD_NUMBER
-      docker images
-      docker tag $REPO:latest $REPO:$TAG
-      docker tag $REPO:latest $REPO:$COMMIT
-      docker push $REPO
+            +%Y%m%d).$TRAVIS_BUILD_NUMBER;
+      docker images;
+      docker tag $REPO:latest $REPO:$TAG;
+      docker tag $REPO:latest $REPO:$COMMIT;
+      docker push $REPO;
     fi
   - echo All done.
