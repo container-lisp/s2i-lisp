@@ -2,8 +2,10 @@
 
 set -e
 
+DYNAMIC_SPACE_SIZE=${APP_MEM-$((MEMORY_LIMIT * 90 / 100))}
+
 SBCL_OPTS=(
-    --dynamic-space-size "${APP_MEM-256}"
+    --dynamic-space-size "${DYNAMIC_SPACE_SIZE}"
 )
 
 echo "---> Installing application source ..."

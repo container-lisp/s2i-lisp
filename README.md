@@ -118,7 +118,8 @@ repository.
     This value will be passed to sbcl via `--dynamic-space-size` and
     should be set to the amount of memory the application needs. It
     will be used for both building the image as well as running it.
-    Its default value is 256M.
+    Its default value is 90% of available memory as reported by
+    cgroups.
 
 * **DEV_BACKEND**
 

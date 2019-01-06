@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# Script for parsing cgroup information
+#
+# This script will read some limits from the cgroup system and parse
+# them, printing out "VARIABLE=VALUE" on each line for every limit that is
+# successfully read. Output of this script can be directly fed into
+# bash's export command. Recommended usage from a bash script:
+#
+#     source cgroup-limits
+#
+# Variables currently supported:
+#     MEMORY_LIMIT_IN_BYTES
+#         Maximum amount of user memory in bytes. The value is taken from
+#         /sys/fs/cgroup/memory/memory.limit_in_bytes
+#
+#         Fallback: physical memory (arbitary high value)
+#     CPU_CORES
+#         Number of detected CPU cores that can be used. This value is taken from
+#          `grep -c ^processor /proc/cpuinfo`
+
+PHYSICAL_MEMORY_LIMIT_IN_BYTES=$(free -b | awk 'NR==2{print$2}')
+if [ -f /sys/fs/cgroup/memory/memory.limit_in_bytes ]; then
+  export MEMORY_LIMIT_IN_BYTES=$(cat /sys/fs/cgroup/memory/memory.limit_in_bytes)
+
+  # Fall back to physical memory limit if cgroups returns arbitary value
+  if (($MEMORY_LIMIT_IN_BYTES >= $PHYSICAL_MEMORY_LIMIT_IN_BYTES)); then
+    MEMORY_LIMIT_IN_BYTES=$PHYSICAL_MEMORY_LIMIT_IN_BYTES
+  fi
+else
+  export MEMORY_LIMIT_IN_BYTES=$PHYSICAL_MEMORY_LIMIT_IN_BYTES
+fi
+# Set a memory limit in MB
+export MEMORY_LIMIT=$((MEMORY_LIMIT_IN_BYTES/1024/1024))
+
+# CPU Count
+export CPU_CORES=$(grep -c ^processor /proc/cpuinfo)

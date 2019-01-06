@@ -1,16 +1,20 @@
 #!/bin/bash
 
+source cgroup-limits
+
+DYNAMIC_SPACE_SIZE=${APP_MEM-$((MEMORY_LIMIT * 90 / 100))}
+
 if [ -n "$APP_SCRIPT" ]; then
     PROJECT_PATH=./quicklisp/local-projects/${APP_SYSTEM_NAME}
     SBCL_OPTS=(
         "${SBCL_OPTS[@]}"
-        --dynamic-space-size "${APP_MEM-256}"
+        --dynamic-space-size "${DYNAMIC_SPACE_SIZE}"
         --load "${PROJECT_PATH}/$(eval echo ${APP_SCRIPT})"
     )
 else
     SBCL_OPTS=(
         "${SBCL_OPTS[@]}"
-        --dynamic-space-size "${APP_MEM-256}"
+        --dynamic-space-size "${DYNAMIC_SPACE_SIZE}"
         --eval "(ql:quickload :$(eval echo ${APP_SYSTEM_NAME}))"
         --eval "$(eval echo ${APP_EVAL})"
     )
