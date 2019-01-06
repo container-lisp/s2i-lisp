@@ -25,6 +25,9 @@ after_success:
       docker images;
       docker tag $REPO:latest $REPO:$TAG;
       docker tag $REPO:latest $REPO:$COMMIT;
-      docker push $REPO;
+      docker images;
+      docker push $REPO:latest;
+      docker push $REPO:$TAG;
+      docker push $REPO:$COMMIT;
     fi
   - echo All done.
