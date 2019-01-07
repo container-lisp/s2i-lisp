@@ -34,7 +34,7 @@ ENV HOME=/opt/app-root \
     PATH=/opt/app-root/src/bin:/opt/app-root/bin:/opt/rh/devtoolset-7/root/usr/bin/:$PATH
 
 RUN yum install -y centos-release-scl && \
-    yum install -y devtoolset-7-gcc* && \
+    yum install -y devtoolset-7-gcc devtoolset-7-gcc-c++ && \
     yum install -y libuv libuv-devel && \
     yum clean all -y && \
     scl enable devtoolset-7 bash && \
