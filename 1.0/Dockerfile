@@ -29,9 +29,9 @@ ENV HOME=/opt/app-root \
     LANGUAGE=en_US.UTF-8 \
     BASH_ENV=/opt/app-root/etc/scl_enable \
     ENV=/opt/app-root/etc/scl_enable \
-    SBCL_VERSION=1.4.15 \
     PROMPT_COMMAND=". /opt/app-root/etc/scl_enable" \
-    PATH=/opt/app-root/src/bin:/opt/app-root/bin:/opt/rh/devtoolset-7/root/usr/bin/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    SBCL_VERSION=1.4.15 \
+    PATH=/opt/app-root/src/bin:/opt/app-root/bin:/opt/rh/devtoolset-7/root/usr/bin/:$PATH
 
 RUN yum install -y centos-release-scl && \
     yum install -y devtoolset-7-gcc* && \
