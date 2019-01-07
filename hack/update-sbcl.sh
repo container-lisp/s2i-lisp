@@ -10,7 +10,7 @@ die() {
     exit 1
 }
 
-FILES=( ../1.0/Dockerfile )
+FILES=( ../1.0/Dockerfile ../1.0/Dockerfile.rhel7 )
 
 which wget &>/dev/null || die "This script requires wget."
 
