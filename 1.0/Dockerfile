@@ -35,12 +35,10 @@ ENV HOME=/opt/app-root \
 
 RUN yum install -y centos-release-scl && \
     yum install -y devtoolset-7-gcc devtoolset-7-gcc-c++ && \
-    yum install -y libuv libuv-devel && \
+    yum install -y libev libev-devel libuv libuv-devel && \
     yum clean all -y && \
     scl enable devtoolset-7 bash && \
     gcc --version && \
-    rpm -ivh http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic/libev4-4.24-alt1.x86_64.rpm && \
-    rpm -ivh http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic/libev-devel-4.24-alt1.x86_64.rpm && \
     rm -rf /var/cache/yum
 
 WORKDIR /opt/app-root
