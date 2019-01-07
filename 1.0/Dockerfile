@@ -15,7 +15,7 @@ LABEL io.k8s.description="Platform for building and running Common Lisp applicat
       io.openshift.tags="builder,cl,lisp,sbcl" \
       io.openshift.s2i.scripts-url=image://$STI_SCRIPTS_PATH
 
-RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
+RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     yum update -y && \
     yum clean all -y && \
     localedef -i en_US -c -f UTF-8 en_US.UTF-8
