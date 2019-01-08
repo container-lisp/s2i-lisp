@@ -133,3 +133,26 @@ repository.
     application needs to use this port). This setting will only come
     into effect when a development backend has been selected via
     `DEV_ENV`.
+
+Public Container Images
+-----------------------
+
+The centos7-based S2I images are published on dockerhub, as
+`containerlinux/lisp-10-centos7'.  Image tags are as follows:
+
+* `latest`: the most recent build of the very latest quicklisp, SBCL
+  and OS bits.
+
+* Quicklisp dist version date (eg. `20181210`): The latest build based
+  on this quicklisp distribution version.  If you use this tag the
+  quicklisp bits will never change, but the underlying OS and SBCL
+  bits may.
+
+* Git commit hash (eg. `b6ef12a`): The semantics of this tag are the
+  same as above. It is provided as a convenience in order to map back
+  to the original source version in this repo.
+
+* Quicklisp dist version date + travis-ci build number (eg. `20181210.26`):
+  This identifies a specific build for a specific
+  quicklisp distribution.  This is a unique build, and will never
+  change.
