@@ -1,0 +1,27 @@
+--- quicklisp/quicklisp/http.lisp~	2017-06-27 20:42:01.000000000 -0400
++++ quicklisp/quicklisp/http.lisp	2019-01-08 06:52:26.654287287 -0500
+@@ -809,6 +809,24 @@
+               (maximum-redirects *maximum-redirects*))
+   "default scheme-function for http protocol."
+   (setf url (merge-urls url *default-url-defaults*))
++
++  ;; --- container-lisp local hack ----------------------------------------
++  ;;
++  ;; We want to use a local quicklisp mirror if one is deployed in the
++  ;; current OpenShift project.  Test whether we can do this by
++  ;; performing a DNS check for "quicklisp-mirror" (FQDN is
++  ;; "quicklisp-mirror.PROJECT.svc.cluster.local").
++  
++  (if (string= (hostname url) "beta.quicklisp.org")
++      (setf (hostname url)
++	    (handler-case
++		(progn
++		  (sb-bsd-sockets:get-host-by-name "quicklisp-mirror")
++		  "quicklisp-mirror")
++	      (sb-bsd-sockets:host-not-found-error ()
++		"beta.quicklisp.org"))))
++  ;; ----------------------------------------------------------------------
++
+   (setf file (merge-pathnames file))
+   (let ((redirect-count 0)
+         (original-url url)
