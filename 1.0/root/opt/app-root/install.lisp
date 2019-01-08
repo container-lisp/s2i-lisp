@@ -4,6 +4,9 @@
 
 (quicklisp-quickstart:install :path "/opt/app-root/quicklisp/" :dist-url *dist-url*)
 
+(format t "Patching quicklisp to automatically use a local quicklisp mirror...~%")
+(uiop:run-program "patch -p0 < quicklisp-mirror.patch" :output *standard-output*)
+
 ;; Pre-load/compile slynk and swank
 (ql:quickload :swank)
 (ql:quickload :slynk)
