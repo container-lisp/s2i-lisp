@@ -52,8 +52,8 @@ RUN wget --progress=bar:force "https://downloads.sourceforge.net/project/sbcl/sb
     wget https://beta.quicklisp.org/quicklisp.lisp && \
     sbcl --non-interactive --load install.lisp && \
     usermod -d ${HOME} default && \
-    chown -R 1001:1001 /opt/app-root && \
-    chmod -R go+rw /opt/app-root
+    chown -R 1001:0 /opt/app-root && \
+    chmod -R g+rwX,o= /opt/app-root
 
 USER 1001
 
