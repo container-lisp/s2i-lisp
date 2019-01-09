@@ -51,6 +51,7 @@ RUN wget --progress=bar:force "https://downloads.sourceforge.net/project/sbcl/sb
     cd .. && rm -rf sbcl-${SBCL_VERSION}-x86-64-linux-binary.tar.bz2 sbcl-${SBCL_VERSION}-x86-64-linux && \
     wget https://beta.quicklisp.org/quicklisp.lisp && \
     sbcl --non-interactive --load install.lisp && \
+    usermod -d ${HOME} default && \
     chown -R 1001:1001 /opt/app-root && \
     chmod -R go+rw /opt/app-root
 
