@@ -4,6 +4,7 @@ set -e
 
 SBCL_OPTS=(
     --dynamic-space-size "${APP_MEM-256}"
+    --disable-debugger
 )
 
 echo "---> Installing application source ..."
