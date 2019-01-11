@@ -7,8 +7,6 @@ MAINTAINER The container-lisp hackers @ github.com/container-lisp
 
 EXPOSE 8080
 
-ENV LISP_VERSION 1.0
-
 LABEL io.k8s.description="Platform for building and running Common Lisp applications" \
       io.k8s.display-name="Common Lisp" \
       io.openshift.expose-services="8080:http" \
@@ -30,6 +28,7 @@ ENV HOME=/opt/app-root \
     BASH_ENV=/opt/app-root/etc/scl_enable \
     ENV=/opt/app-root/etc/scl_enable \
     PROMPT_COMMAND=". /opt/app-root/etc/scl_enable" \
+    LISP_VERSION=1.0 \
     SBCL_VERSION=1.4.15 \
     PATH=/opt/app-root/src/bin:/opt/app-root/bin:/opt/rh/devtoolset-7/root/usr/bin/:$PATH
 
