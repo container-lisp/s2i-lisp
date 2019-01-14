@@ -132,7 +132,7 @@ repository.
     else for your application to use a different port (e.g. if your
     application needs to use this port). This setting will only come
     into effect when a development backend has been selected via
-    `DEV_ENV`.
+    `DEV_BACKEND`.
 
 Public Container Images
 -----------------------
