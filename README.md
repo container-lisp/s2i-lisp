@@ -62,10 +62,10 @@ forwarding, as above, but if you run this container by hand you will
 want to use the docker `--net host` option to allow for connections to
 swank.
 
-Also note that instead of using sly, you can also decide to use
-slime, the traditional emacs common lisp development environment.
-See below the section about environment variable `DEV_ENV` on how
-to do this.
+Also note that instead of using sly, you can also decide to use slime,
+the traditional emacs common lisp development environment. See below
+the section about environment variable `DEV_BACKEND` on how to do
+this.
 
 To install this image along with sample application template into OpenShift, run the following as the cluster manager:
 ```
