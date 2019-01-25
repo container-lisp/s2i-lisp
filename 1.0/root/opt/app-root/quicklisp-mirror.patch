@@ -17,7 +17,7 @@
 +	    (handler-case
 +		(progn
 +		  (sb-bsd-sockets:get-host-by-name "quicklisp-mirror")
-+		  "quicklisp-mirror:8080")
++		  "quicklisp-mirror")
 +	      (sb-bsd-sockets:host-not-found-error ()
 +		"beta.quicklisp.org"))))
 +  ;; ----------------------------------------------------------------------
