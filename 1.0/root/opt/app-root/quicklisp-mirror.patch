@@ -10,13 +10,15 @@
 +  ;; We want to use a local quicklisp mirror if one is deployed in the
 +  ;; current OpenShift project.  Test whether we can do this by
 +  ;; performing a DNS check for "quicklisp-mirror" (FQDN is
-+  ;; "quicklisp-mirror.PROJECT.svc.cluster.local").
++  ;; "quicklisp-mirror.PROJECT.svc.cluster.local").  quicklisp-mirror
++  ;; always talks on port 8080.
 +  
 +  (if (string= (hostname url) "beta.quicklisp.org")
 +      (setf (hostname url)
 +	    (handler-case
 +		(progn
 +		  (sb-bsd-sockets:get-host-by-name "quicklisp-mirror")
++		  (setf (port url) 8080)
 +		  "quicklisp-mirror")
 +	      (sb-bsd-sockets:host-not-found-error ()
 +		"beta.quicklisp.org"))))
