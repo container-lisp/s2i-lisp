@@ -1,6 +1,6 @@
---- quicklisp/quicklisp/http.lisp~	2017-06-27 20:42:01.000000000 -0400
-+++ quicklisp/quicklisp/http.lisp	2019-01-08 06:52:26.654287287 -0500
-@@ -809,6 +809,24 @@
+--- quicklisp/quicklisp/http.lisp.orig	2019-01-26 04:59:20.377982385 -0500
++++ quicklisp/quicklisp/http.lisp	2019-01-26 05:00:57.778004324 -0500
+@@ -809,6 +809,26 @@
                (maximum-redirects *maximum-redirects*))
    "default scheme-function for http protocol."
    (setf url (merge-urls url *default-url-defaults*))
