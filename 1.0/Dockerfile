@@ -29,7 +29,7 @@ ENV HOME=/opt/app-root \
     ENV=/opt/app-root/etc/scl_enable \
     PROMPT_COMMAND=". /opt/app-root/etc/scl_enable" \
     LISP_VERSION=1.0 \
-    SBCL_VERSION=1.5.0 \
+    SBCL_VERSION=1.5.1 \
     PATH=/opt/app-root/src/bin:/opt/app-root/bin:/opt/rh/devtoolset-7/root/usr/bin/:$PATH
 
 RUN yum install -y centos-release-scl && \
