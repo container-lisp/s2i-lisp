@@ -32,7 +32,7 @@ ENV HOME=/opt/app-root \
     BASH_ENV=/opt/app-root/etc/scl_enable \
     ENV=/opt/app-root/etc/scl_enable \
     LISP_VERSION=1.0 \
-    SBCL_VERSION=1.5.1 \
+    SBCL_VERSION=1.5.2 \
     PROMPT_COMMAND=". /opt/app-root/etc/scl_enable" \
     PATH=/opt/app-root/src/bin:/opt/app-root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
