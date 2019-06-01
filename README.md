@@ -138,7 +138,7 @@ Public Container Images
 -----------------------
 
 The centos7-based S2I images are published on dockerhub, as
-`containerlinux/lisp-10-centos7`.  Image tags are as follows:
+`containerlisp/lisp-10-centos7`.  Image tags are as follows:
 
 * `latest`: the most recent build of the very latest quicklisp, SBCL
   and OS bits.
