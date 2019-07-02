@@ -9,7 +9,7 @@
         "kind": "BuildConfig",
         "apiVersion": "v1",
         "metadata":{
-          "name": "lisp-rhel7-build"
+          "name": "lisp-ubi8-build"
         },
         "spec": {
           "triggers": [
@@ -37,18 +37,18 @@
               "env": [
                 {
                   "name": "IMAGE_NAME",
-                  "value": "openshift/lisp-rhel7"
+                  "value": "openshift/lisp-ubi8"
                 }],
               "from": {
                  "kind": "ImageStreamTag",
-                 "name": "swarm-centos:latest"
+                 "name": "swarm-ubi8:latest"
               }
             }
           },
           "output": {
             "to": {
               "kind": "ImageStreamTag",
-              "name": "lisp-rhel7:latest"
+              "name": "lisp-ubi8:latest"
             }
           }
         }
@@ -57,7 +57,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "lisp-rhel7"
+        "name": "lisp-ubi8"
       },
       "spec": {
           "dockerImageRepository": "",

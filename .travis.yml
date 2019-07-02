@@ -5,7 +5,7 @@ language: c
 env:
   global:
      - COMMIT=${TRAVIS_COMMIT::7}
-     - REPO=containerlisp/lisp-10-centos7
+     - REPO=containerlisp/lisp-10-ubi8
 
 services:
   - docker

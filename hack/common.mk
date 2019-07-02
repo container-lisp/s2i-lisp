@@ -2,11 +2,7 @@ SKIP_SQUASH?=0
 
 build = hack/build.sh
 
-ifeq ($(TARGET),rhel7)
-	OS := rhel7
-else
-	OS := centos7
-endif
+OS = ubi8
 
 script_env = \
 	SKIP_SQUASH=$(SKIP_SQUASH)                      \
