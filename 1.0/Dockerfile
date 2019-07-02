@@ -34,7 +34,7 @@ WORKDIR $HOME
 COPY ./root/ /
 
 # Build libev from source since it is not available in ubi8-base nor ubi8-app-stream repos
-RUN curl -O "http://dist.schmorp.de/libev/libev-${LIBEV_VERSION}.tar.gz" && \
+RUN curl -O "http://dist.schmorp.de/libev/Attic/libev-${LIBEV_VERSION}.tar.gz" && \
     tar xvf libev-${LIBEV_VERSION}.tar.gz && \
     cd libev-${LIBEV_VERSION} && \
     chmod +x autogen.sh && \
