@@ -4,7 +4,7 @@
 # Name of resulting image will be: 'NAMESPACE/BASE_IMAGE_NAME-VERSION-OS'.
 #
 # BASE_IMAGE_NAME - Usually name of the main component within container.
-# OS - Specifies distribution - "rhel7" or "centos7"
+# OS - Specifies distribution - "ubi8"
 # VERSION - Specifies the image version - (must match with subdirectory in repo)
 # TEST_MODE - If set, build a candidate image and test it
 # TAG_ON_SUCCESS - If set, tested image will be re-tagged as a non-candidate
@@ -63,17 +63,7 @@ dirs=${VERSION:-$VERSIONS}
 for dir in ${dirs}; do
   case " $OPENSHIFT_NAMESPACES " in
     *\ ${dir}\ *) ;;
-    *)
-      if [ "${OS}" == "centos7" ]; then
-        NAMESPACE="containerlisp/"
-      else
-        # we don't test rhel versions of SCL owned images
-        if [[ "${SKIP_RHEL_SCL}" == "1" ]]; then
-          echo "Skipping rhel scl image ${BASE_IMAGE_NAME}-${dir//./}-{$OS}"
-          continue
-        fi
-        NAMESPACE="containerlisp/"
-      fi
+    *) NAMESPACE="containerlisp/"
   esac
 
   IMAGE_NAME="${NAMESPACE}${BASE_IMAGE_NAME}-${dir//./}-${OS}"
@@ -85,11 +75,7 @@ for dir in ${dirs}; do
   echo "-> Building ${IMAGE_NAME} ..."
 
   pushd ${dir} > /dev/null
-  if [ "$OS" == "rhel7" -o "$OS" == "rhel7-candidate" ]; then
-    docker_build_with_version Dockerfile.rhel7
-  else
-    docker_build_with_version Dockerfile
-  fi
+  docker_build_with_version Dockerfile
 
   if [[ -v TEST_MODE ]]; then
     IMAGE_NAME=${IMAGE_NAME} test/run

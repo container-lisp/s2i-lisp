@@ -6,9 +6,8 @@ Common Lisp + Quicklisp OpenShift Build Image
 This repository contains the source for building a Quicklisp based
 Common Lisp application as a reproducible docker image using
 [source-to-image](https://github.com/openshift/source-to-image). This
-docker image is CentOS based, but the project includes
-Dockerfile.rhel7 for creating a RHEL based image as well. The
-resulting images can be run using [docker](http://docker.io).
+docker image is UBI-8 based. The resulting images can be run using
+[docker](http://docker.io).
 
 Usage
 -----
@@ -18,7 +17,7 @@ application using standalone
 [S2I](https://github.com/openshift/source-to-image) and then run the
 resulting image with [docker](http://docker.io) execute:
 ```
-$ s2i build https://github.com/container-lisp/sample-lisp-app containerlisp/lisp-10-centos7 sample-lisp-app
+$ s2i build https://github.com/container-lisp/sample-lisp-app containerlisp/lisp-10-ubi8 sample-lisp-app
 $ docker run -p 8080:8080 sample-lisp-app
 ```
 
@@ -31,7 +30,7 @@ $ curl 127.0.0.1:8080
 
 You will likely, however, prefer [OpenShift](https://www.openshift.com), where applications are created like so:
 ```
-$ oc new-app containerlisp/lisp-10-centos7~git://github.com/container-lisp/sample-lisp-app
+$ oc new-app containerlisp/lisp-10-ubi8~git://github.com/container-lisp/sample-lisp-app
 ```
 
 A [slynk](https://github.com/joaotavora/sly) server will be started on
@@ -137,8 +136,8 @@ repository.
 Public Container Images
 -----------------------
 
-The centos7-based S2I images are published on dockerhub, as
-`containerlisp/lisp-10-centos7`.  Image tags are as follows:
+The ubi8-based S2I images are published on dockerhub, as
+`containerlisp/lisp-10-ubi8`.  Image tags are as follows:
 
 * `latest`: the most recent build of the very latest quicklisp, SBCL
   and OS bits.
