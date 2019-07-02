@@ -22,7 +22,7 @@ ENV HOME=/opt/app-root \
     LANGUAGE=C.utf8 \
     LISP_VERSION=1.0 \
     SBCL_VERSION=1.5.4 \
-    LIBEV_VERSION=4.25
+    LIBEV_VERSION=4.27
 
 RUN yum install -y --disableplugin=subscription-manager \
         bzip2 git make patch automake autoconf libtool gcc gcc-c++ libuv && \
