@@ -16,17 +16,6 @@
 OS=${1-$OS}
 VERSION=${2-$VERSION}
 
-# Default to podman where available, docker otherwise.
-# Override by setting the DOCKER environment variable.
-if test -z "$DOCKER"; then
-  which podman > /dev/null 2>&1
-  if [ $? != 0 ]; then
-    export DOCKER=docker
-  else
-    export DOCKER=podman
-  fi
-fi
-
 DOCKERFILE_PATH=""
 
 test -z "$BASE_IMAGE_NAME" && {
@@ -50,7 +39,7 @@ function docker_build_with_version {
   if [[ "${UPDATE_BASE}" == "1" ]]; then
     BUILD_OPTIONS+=" --pull=true"
   fi
-  $DOCKER build ${BUILD_OPTIONS} -t ${IMAGE_NAME} -f "${dockerfile}.version" .
+  docker build ${BUILD_OPTIONS} -t ${IMAGE_NAME} -f "${dockerfile}.version" .
   if [[ "${SKIP_SQUASH}" != "1" ]]; then
     squash "${dockerfile}.version"
   fi
@@ -93,7 +82,7 @@ for dir in ${dirs}; do
 
     if [[ $? -eq 0 ]] && [[ "${TAG_ON_SUCCESS}" == "true" ]]; then
       echo "-> Re-tagging ${IMAGE_NAME} image to ${IMAGE_NAME%"-candidate"}"
-      $DOCKER tag -f $IMAGE_NAME ${IMAGE_NAME%"-candidate"}
+      docker tag -f $IMAGE_NAME ${IMAGE_NAME%"-candidate"}
     fi
   fi
 
