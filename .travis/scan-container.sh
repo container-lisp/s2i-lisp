@@ -16,7 +16,7 @@ DOCKER_GATEWAY=$(docker network inspect bridge --format "{{range .IPAM.Config}}{
 wget -qO clair-scanner https://github.com/arminc/clair-scanner/releases/download/v12/clair-scanner_linux_amd64 && chmod +x clair-scanner
 ./clair-scanner --ip="$DOCKER_GATEWAY" $REPO
 # Tests
-for C in containerlisp/lisp-10-rhel7 atgreen/moxielogic-builder-f25; do
+for C in containerlisp/lisp-10-centos7 atgreen/moxielogic-builder-f25; do
     docker pull $C
     ./clair-scanner --ip="$DOCKER_GATEWAY" $C
 done
