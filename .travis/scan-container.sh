@@ -3,6 +3,16 @@
 set -x
 
 # -----------------------------------------------------------------------------
+# Use Clair
+
+wget https://raw.githubusercontent.com/singularityhub/stools/master/docker-compose.yml
+docker-compose up -d clair-db
+docker-compose up -d clair-scanner
+sleep 3
+docker exec -it clair-scanner sclair $REPO
+
+
+# -----------------------------------------------------------------------------
 # Use the Anchore's inline scanner.
 
 curl -s https://ci-tools.anchore.io/inline_scan-v0.3.3 | bash -s -- -p -r $REPO

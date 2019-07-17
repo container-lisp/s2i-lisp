@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi7/s2i-core
+FROM registry.access.redhat.com/ubi8/s2i-core
 
 # This image provides a Common Lisp environment based on QuickLisp and
 # that you can use to run your Common Lisp applications.
@@ -24,7 +24,8 @@ ENV HOME=/opt/app-root \
     SBCL_VERSION=1.5.4 \
     LIBEV_VERSION=4.27
 
-RUN yum install -y \
+RUN rm /etc/rhsm-host && \
+    yum install -y \
         bzip2 git make patch automake autoconf libtool gcc gcc-c++ libuv && \
     yum clean -y all && \
     locale -a && \
