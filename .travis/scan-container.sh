@@ -19,7 +19,7 @@ wget -qO clair-scanner https://github.com/arminc/clair-scanner/releases/download
 for C in containerlisp/lisp-10-rhel7 atgreen/moxielogic-builder-f25; do
     docker pull $C
     ./clair-scanner --ip="$DOCKER_GATEWAY" $C
-fi
+done
 
 # -----------------------------------------------------------------------------
 # Use the Anchore's inline scanner.
