@@ -2,13 +2,27 @@
 
 set -x
 
-wget https://get.aquasec.com/microscanner
-chmod +x microscanner
+# -----------------------------------------------------------------------------
+# Use the Anchore's inline scanner.
 
-docker build . -f - <<EOF
-FROM $REPO:latest
+curl -s https://ci-tools.anchore.io/inline_scan-v0.3.3 | bash -s -- -p $REPO -r
+
+
+# -----------------------------------------------------------------------------
+# Use Aqua Security's microscanner...
+
+if ! test -f microscanner; then
+  wget https://get.aquasec.com/microscanner
+  chmod +x microscanner
+fi  
+
+cat > Dockerfile.scan <<EOF
+FROM $REPO
 USER 0
 ADD microscanner /
 RUN /microscanner $AQUACODE -c
 EOF
+
+podman build . -f Dockerfile.scan
+
 
