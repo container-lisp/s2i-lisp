@@ -14,7 +14,7 @@ before_install:
   - make
   - wget https://get.aquasec.com/microscanner && chmod +x microscanner
   - |
-    docker build . -f -(cat <<-EOF
+    docker build . -f - <(cat <<-EOF
     FROM $REPO:latest
     USER 0
     ADD microscanner /
