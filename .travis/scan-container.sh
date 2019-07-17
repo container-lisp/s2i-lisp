@@ -3,6 +3,14 @@
 set -x
 
 # -----------------------------------------------------------------------------
+# Download and configure rlgl
+
+wget -qO - https://rl.gl/cli/rlgl-linux-amd64.tgz | tar xvfz -
+./rlgl/rlgl login https://rl.gl
+
+ID=$(./rlgl/rlgl start)
+
+# -----------------------------------------------------------------------------
 # Use Clair
 
 # travis-ci comes with postgresql on, which clashes with the postgresql we're
@@ -14,11 +22,14 @@ docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-sc
 sleep 1
 DOCKER_GATEWAY=$(docker network inspect bridge --format "{{range .IPAM.Config}}{{.Gateway}}{{end}}")
 wget -qO clair-scanner https://github.com/arminc/clair-scanner/releases/download/v12/clair-scanner_linux_amd64 && chmod +x clair-scanner
-./clair-scanner --ip="$DOCKER_GATEWAY" $REPO
+./clair-scanner --ip="$DOCKER_GATEWAY" -r clair-report.json $REPO
+./rlgl/rlgl e --id=$ID --policy=https://github.com/atgreen/test-policy.git clair-report.json
+
 # Tests
 for C in containerlisp/lisp-10-centos7 atgreen/moxielogic-builder-f25; do
     docker pull $C
     ./clair-scanner --ip="$DOCKER_GATEWAY" $C
+    ./rlgl/rlgl e --id=$ID --policy=https://github.com/atgreen/test-policy.git clair-report.json
 done
 
 # -----------------------------------------------------------------------------
