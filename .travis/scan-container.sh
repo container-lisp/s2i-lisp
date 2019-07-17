@@ -5,6 +5,7 @@ set -x
 # -----------------------------------------------------------------------------
 # Use Clair
 
+sudo apt-get --yes remove postgresql\*
 wget https://raw.githubusercontent.com/singularityhub/stools/master/docker-compose.yml
 docker-compose up -d clair-db
 docker-compose up -d clair-scanner
