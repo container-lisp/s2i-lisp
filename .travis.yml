@@ -12,6 +12,14 @@ services:
 
 before_install:
   - make
+  - wget https://get.aquasec.com/microscanner && chmod +x microscanner
+  - cat > Dockerfile.scanner <<EOF
+FROM $REPO:latest
+USER 0
+ADD microscanner /
+RUN /microscanner $AQUACODE -c
+EOF
+  - docker build . -f Dockerfile.scanner 
 
 script:
 - 
