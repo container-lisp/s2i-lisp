@@ -24,8 +24,7 @@ ENV HOME=/opt/app-root \
     SBCL_VERSION=1.5.4 \
     LIBEV_VERSION=4.27
 
-RUN rm /etc/rhsm-host && \
-    yum install -y \
+RUN yum install -y \
         bzip2 git make patch automake autoconf libtool gcc gcc-c++ libuv && \
     yum clean -y all && \
     locale -a && \
