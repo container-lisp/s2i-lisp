@@ -13,14 +13,7 @@ services:
 before_install:
   - make
   - wget https://get.aquasec.com/microscanner && chmod +x microscanner
-  - |
-    cat > Dockerfile.scan <<EOF
-    FROM $REPO:latest
-    USER 0
-    ADD microscanner /
-    RUN /microscanner $AQUACODE -c
-    EOF
-    docker build . -f Dockerfile.scan
+  - ./.travis/scan-container.sh
 
 script:
 - 
