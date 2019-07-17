@@ -5,7 +5,7 @@ language: c
 env:
   global:
      - COMMIT=${TRAVIS_COMMIT::7}
-     - REPO=containerlisp/lisp-10-ubi8
+     - REPO=containerlisp/lisp-10-ubi7
 
 services:
   - docker
@@ -17,7 +17,6 @@ before_install:
 
 script:
 - 
-
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then

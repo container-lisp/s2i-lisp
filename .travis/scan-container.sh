@@ -5,7 +5,7 @@ set -x
 # -----------------------------------------------------------------------------
 # Use the Anchore's inline scanner.
 
-curl -s https://ci-tools.anchore.io/inline_scan-v0.3.3 | bash -s -- -p $REPO -r
+curl -s https://ci-tools.anchore.io/inline_scan-v0.3.3 | bash -s -- -p -r $REPO
 
 
 # -----------------------------------------------------------------------------
@@ -23,6 +23,4 @@ ADD microscanner /
 RUN /microscanner $AQUACODE -c
 EOF
 
-podman build . -f Dockerfile.scan
-
-
+docker build . -f Dockerfile.scan
