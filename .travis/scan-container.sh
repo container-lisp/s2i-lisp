@@ -27,18 +27,13 @@ wget -qO clair-scanner https://github.com/arminc/clair-scanner/releases/download
 ./clair-scanner --ip="$DOCKER_GATEWAY" -r clair-report.json $REPO
 ./rlgl/rlgl e --id=$ID --policy=$RLGL_POLICY clair-report.json
 
-# Tests
-for C in containerlisp/lisp-10-centos7 atgreen/moxielogic-builder-f25; do
-    docker pull $C
-    ./clair-scanner --ip="$DOCKER_GATEWAY" -r clair-report.json $C
-    ./rlgl/rlgl e --id=$ID --policy=$RLGL_POLICY clair-report.json
-done
-
 # -----------------------------------------------------------------------------
 # Use the Anchore's inline scanner.
 
 curl -s https://ci-tools.anchore.io/inline_scan-v0.3.3 | bash -s -- -p -r $REPO
-
+for R in anchore-reports/*; do
+    ./rlgl/rlgl e --id=$ID --policy=$RLGL_POLICY $R
+done;    
 
 # -----------------------------------------------------------------------------
 # Use Aqua Security's microscanner...
@@ -56,3 +51,9 @@ RUN /microscanner $AQUACODE -c
 EOF
 
 docker build . -f Dockerfile.scan
+
+# -----------------------------------------------------------------------------
+
+# Summarize scans
+
+./rlgl/rlgl log --id=$ID
