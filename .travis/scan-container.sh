@@ -2,11 +2,13 @@
 
 set -x
 
+RLGL_POLICY=https://github.com/atgreen/test-policy.git
+
 # -----------------------------------------------------------------------------
-# Download and configure rlgl
+# Download and configure the rlgl client
 
 wget -qO - https://rl.gl/cli/rlgl-linux-amd64.tgz | tar xvfz -
-./rlgl/rlgl login https://rl.gl
+./rlgl/rlgl login http://rl.gl
 
 ID=$(./rlgl/rlgl start)
 
@@ -23,13 +25,13 @@ sleep 1
 DOCKER_GATEWAY=$(docker network inspect bridge --format "{{range .IPAM.Config}}{{.Gateway}}{{end}}")
 wget -qO clair-scanner https://github.com/arminc/clair-scanner/releases/download/v12/clair-scanner_linux_amd64 && chmod +x clair-scanner
 ./clair-scanner --ip="$DOCKER_GATEWAY" -r clair-report.json $REPO
-./rlgl/rlgl e --id=$ID --policy=https://github.com/atgreen/test-policy.git clair-report.json
+./rlgl/rlgl e --id=$ID --policy=$RLGL_POLICY clair-report.json
 
 # Tests
 for C in containerlisp/lisp-10-centos7 atgreen/moxielogic-builder-f25; do
     docker pull $C
     ./clair-scanner --ip="$DOCKER_GATEWAY" $C
-    ./rlgl/rlgl e --id=$ID --policy=https://github.com/atgreen/test-policy.git clair-report.json
+    ./rlgl/rlgl e --id=$ID --policy=$RLGL_POLICY clair-report.json
 done
 
 # -----------------------------------------------------------------------------
