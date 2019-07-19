@@ -7,7 +7,7 @@ RLGL_POLICY=https://github.com/atgreen/test-policy.git
 # -----------------------------------------------------------------------------
 # Download and configure the rlgl client
 
-wget -qO - https://rl.gl/cli/rlgl-linux-amd64.tgz | tar xvfz -
+wget -qO - http://rl.gl/cli/rlgl-linux-amd64.tgz | tar xvfz -
 ./rlgl/rlgl login http://rl.gl
 
 ID=$(./rlgl/rlgl start)
