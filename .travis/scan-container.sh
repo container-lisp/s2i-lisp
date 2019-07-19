@@ -31,9 +31,11 @@ wget -qO clair-scanner https://github.com/arminc/clair-scanner/releases/download
 # Use the Anchore's inline scanner.
 
 curl -s https://ci-tools.anchore.io/inline_scan-v0.3.3 | bash -s -- -p -r $REPO
-for R in anchore-reports/*; do
-    ./rlgl/rlgl e --id=$ID --policy=$RLGL_POLICY $R
-done;    
+
+# Test to see output of bad container...
+curl -s https://ci-tools.anchore.io/inline_scan-v0.3.3 | bash -s -- -p -r containerlisp/lisp-10-centos7
+
+./rlgl/rlgl e --id=$ID --policy=$RLGL_POLICY $REPO
 
 # -----------------------------------------------------------------------------
 # Use Aqua Security's microscanner...
