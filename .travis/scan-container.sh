@@ -30,7 +30,7 @@ wget -qO clair-scanner https://github.com/arminc/clair-scanner/releases/download
 # Tests
 for C in containerlisp/lisp-10-centos7 atgreen/moxielogic-builder-f25; do
     docker pull $C
-    ./clair-scanner --ip="$DOCKER_GATEWAY"-r clair-report.json $C
+    ./clair-scanner --ip="$DOCKER_GATEWAY" -r clair-report.json $C
     ./rlgl/rlgl e --id=$ID --policy=$RLGL_POLICY clair-report.json
 done
 
