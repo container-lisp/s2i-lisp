@@ -5,12 +5,17 @@ set -x
 RLGL_POLICY=https://github.com/atgreen/test-policy.git
 
 # -----------------------------------------------------------------------------
-# Download and configure the rlgl client
+# Configure rlgl
 
-wget -qO - http://rl.gl/cli/rlgl-linux-amd64.tgz | tar xvfz -
-./rlgl/rlgl login http://rl.gl
+# Download and extract the client
+wget -qO - http://rl.gl/cli/rlgl-linux-amd64.tgz | \
+    tar --strip-components=2 -xvzf - ./rlgl/rlgl
 
-ID=$(./rlgl/rlgl start)
+# Log into the server
+./rlgl login http://rl.gl
+
+# Generate a player ID for use during report evaluation
+ID=$(./rlgl start)
 
 # -----------------------------------------------------------------------------
 # Use Clair
@@ -25,7 +30,8 @@ sleep 1
 DOCKER_GATEWAY=$(docker network inspect bridge --format "{{range .IPAM.Config}}{{.Gateway}}{{end}}")
 wget -qO clair-scanner https://github.com/arminc/clair-scanner/releases/download/v12/clair-scanner_linux_amd64 && chmod +x clair-scanner
 ./clair-scanner --ip="$DOCKER_GATEWAY" -r clair-report.json $REPO
-./rlgl/rlgl e --id=$ID --policy=$RLGL_POLICY clair-report.json
+
+./rlgl e --id=$ID --policy=$RLGL_POLICY clair-report.json
 
 # -----------------------------------------------------------------------------
 # Use the Anchore's inline scanner.
@@ -35,7 +41,7 @@ curl -s https://ci-tools.anchore.io/inline_scan-v0.3.3 | bash -s -- -p -r $REPO
 # Test to see output of bad container...
 curl -s https://ci-tools.anchore.io/inline_scan-v0.3.3 | bash -s -- -p -r containerlisp/lisp-10-centos7
 
-./rlgl/rlgl e --id=$ID --policy=$RLGL_POLICY $REPO
+./rlgl e --id=$ID --policy=$RLGL_POLICY $REPO
 
 # -----------------------------------------------------------------------------
 # Use Aqua Security's microscanner...
@@ -54,8 +60,10 @@ EOF
 
 docker build . -f Dockerfile.scan
 
+# Run rlgl here once Aqua has fixed their ubi8 scanner
+
 # -----------------------------------------------------------------------------
 
 # Summarize scans
 
-./rlgl/rlgl log --id=$ID
+./rlgl log --id=$ID
