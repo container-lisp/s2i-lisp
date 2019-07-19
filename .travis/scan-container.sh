@@ -64,7 +64,11 @@ if test -f anchore-reports/${REPO}*-vuln.json; then
 fi
 
 # Test to see output of bad container...
-curl -s https://ci-tools.anchore.io/inline_scan-v0.4.1 | bash -s -- -p -r containerlisp/lisp-10-centos7
+# We have to resort to this hack, as travis may timeout on long-running silent processes...
+bash -c "curl -s https://ci-tools.anchore.io/inline_scan-v0.4.1 | bash -s -- -p -r containerlisp/lisp-10-centos7" &
+BASHPID=$!
+while kill -0 $BASHPID 2>/dev/null; do echo "Waiting for the anchore scanner"; sleep 30; done;
+
 if test -f anchore-reports/lisp-10-centos7_latest-vuln.json; then
     ./rlgl e --id=$ID --policy=$RLGL_POLICY anchore-reports/lisp-10-centos7_latest-vuln.json
     exit_on_error $? "!!"
