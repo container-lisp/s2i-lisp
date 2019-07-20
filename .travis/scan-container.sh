@@ -32,25 +32,14 @@ DOCKER_GATEWAY=$(docker network inspect bridge --format "{{range .IPAM.Config}}{
 wget -qO clair-scanner https://github.com/arminc/clair-scanner/releases/download/v12/clair-scanner_linux_amd64 && chmod +x clair-scanner
 
 ./clair-scanner --ip="$DOCKER_GATEWAY" -r clair-report.json $REPO
-
 ./rlgl e --id=$ID --policy=$RLGL_POLICY clair-report.json
 
 # -----------------------------------------------------------------------------
 # Use the Anchore's inline scanner.
 
-#curl -s https://ci-tools.anchore.io/inline_scan-v0.4.1 | bash -s -- -p -r $REPO
-#if test -f anchore-reports/${REPO}*-vuln.json; then
-#    ./rlgl e --id=$ID --policy=$RLGL_POLICY anchore-reports/${REPO}*-vuln.json
-#fi
-
-# Test to see output of bad container...
-# We have to resort to this hack, as travis may timeout on long-running silent processes...
-bash -c "curl -s https://ci-tools.anchore.io/inline_scan-v0.4.1 | bash -s -- -p -r containerlisp/lisp-10-centos7" &
-BASHPID=$!
-while kill -0 $BASHPID 2>/dev/null; do echo "Waiting for the anchore scanner"; sleep 30; done;
-
-if test -f anchore-reports/lisp-10-centos7_latest-vuln.json; then
-    ./rlgl e --id=$ID --policy=$RLGL_POLICY anchore-reports/lisp-10-centos7_latest-vuln.json
+curl -s https://ci-tools.anchore.io/inline_scan-v0.4.1 | bash -s -- -p -r $REPO
+if test -f anchore-reports/${REPO}*-vuln.json; then
+    ./rlgl e --id=$ID --policy=$RLGL_POLICY anchore-reports/${REPO}*-vuln.json
 fi
 
 # -----------------------------------------------------------------------------
@@ -70,7 +59,7 @@ EOF
 
 docker build . -f Dockerfile.scan
 
-# Run rlgl here once Aqua has fixed their ubi8 scanner
+# TODO: Run rlgl here once Aqua has fixed their ubi8 scanner
 
 # -----------------------------------------------------------------------------
 
