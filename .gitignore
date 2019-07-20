@@ -1,2 +1,4 @@
 *~
 Dockerfile.version
+.travis/microscanner
+Dockerfile.scan
