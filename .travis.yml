@@ -6,13 +6,13 @@ env:
   global:
      - COMMIT=${TRAVIS_COMMIT::7}
      - REPO=containerlisp/lisp-10-ubi8
+     - RLGL_POLICY=https://github.com/container-lisp/rlgl-policy.git
 
 services:
   - docker
 
 before_install:
   - make
-  - wget https://get.aquasec.com/microscanner && chmod +x microscanner
   - ./.travis/scan-container.sh
 
 script:
