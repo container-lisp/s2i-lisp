@@ -66,5 +66,6 @@ docker build . -f Dockerfile.scan || true
 # -----------------------------------------------------------------------------
 
 # Summarize scans
-
+echo About to summarize scans
 ./rlgl log --id=$ID
+echo Done
