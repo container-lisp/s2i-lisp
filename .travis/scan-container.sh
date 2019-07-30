@@ -58,6 +58,10 @@ wget -qO clair-scanner https://github.com/arminc/clair-scanner/releases/download
 echo  ---- clair-report.json -----------------------------------------------
 cat clair-report.json
 echo  ----------------------------------------------------------------------
+env
+echo  ----------------------------------------------------------------------
+curl --verbose -X POST https://rl.gl/upload -H 'content-type: application/octet-stream' --data-binary clair-report.json
+echo  ----------------------------------------------------------------------
 ./rlgl e --id=$ID --policy=$RLGL_POLICY clair-report.json
 
 # -----------------------------------------------------------------------------
