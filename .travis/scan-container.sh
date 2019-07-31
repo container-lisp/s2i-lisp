@@ -55,13 +55,6 @@ DOCKER_GATEWAY=$(docker network inspect bridge --format "{{range .IPAM.Config}}{
 wget -qO clair-scanner https://github.com/arminc/clair-scanner/releases/download/v12/clair-scanner_linux_amd64 && chmod +x clair-scanner
 
 ./clair-scanner --ip="$DOCKER_GATEWAY" -r clair-report.json $REPO
-echo  ---- clair-report.json -----------------------------------------------
-cat clair-report.json
-echo  ----------------------------------------------------------------------
-env
-echo  ----------------------------------------------------------------------
-curl --verbose -X POST https://rl.gl/upload -H 'content-type: application/octet-stream' --data-binary clair-report.json
-echo  ----------------------------------------------------------------------
 ./rlgl e --id=$ID --policy=$RLGL_POLICY clair-report.json
 
 # -----------------------------------------------------------------------------
