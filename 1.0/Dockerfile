@@ -22,11 +22,12 @@ ENV HOME=/opt/app-root \
     LANGUAGE=C.utf8 \
     LISP_VERSION=1.0 \
     SBCL_VERSION=1.5.8 \
-    LIBEV_VERSION=4.27
+    LIBEV_VERSION=4.27 \
+    LIBSSH2_VERSION=1.9.0
 
 RUN rm /etc/rhsm-host && \
     yum install -y \
-        bzip2 git make patch automake autoconf libtool gcc gcc-c++ libuv && \
+        bzip2 git make patch automake autoconf libtool gcc gcc-c++ libuv openssl-devel && \
     yum clean -y all && \
     locale -a && \
     gcc --version
@@ -45,6 +46,17 @@ RUN curl -O "http://dist.schmorp.de/libev/Attic/libev-${LIBEV_VERSION}.tar.gz" &
     make install && \
     cd "$HOME" && \
     rm -rf libev*
+
+# Build libssh2 from source since it is not available in ubi8-base nor ubi8-app-stream repos
+RUN curl -O "https://www.libssh2.org/download/libssh2-${LIBSSH2_VERSION}.tar.gz" && \
+    tar xvf libssh2-${LIBSSH2_VERSION}.tar.gz && \
+    cd libssh2-${LIBSSH2_VERSION} && \
+    ./configure --prefix=/usr --with-crypto=openssl && \
+    make && \
+    make install && \
+    cd "$HOME" && \
+    rm -rf libssh2* && \
+    dnf remove -y openssl-devel
 
 RUN curl -L -O "https://downloads.sourceforge.net/project/sbcl/sbcl/${SBCL_VERSION}/sbcl-${SBCL_VERSION}-x86-64-linux-binary.tar.bz2" && \
     curl -L -O https://beta.quicklisp.org/quicklisp.lisp && \
