@@ -57,7 +57,7 @@ RUN curl -O "https://www.libssh2.org/download/libssh2-${LIBSSH2_VERSION}.tar.gz"
     cd "$HOME" && \
     rm -rf libssh2* && \
     mkdir -p /opt/app-root/.ssh && \
-    dnf remove -y openssl-devel
+    dnf remove -y openssl-devel && ls -la /opt/app-root
 
 RUN curl -L -O "https://downloads.sourceforge.net/project/sbcl/sbcl/${SBCL_VERSION}/sbcl-${SBCL_VERSION}-x86-64-linux-binary.tar.bz2" && \
     curl -L -O https://beta.quicklisp.org/quicklisp.lisp && \
