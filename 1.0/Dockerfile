@@ -75,5 +75,7 @@ RUN usermod -d ${HOME} default && \
 
 USER 1001
 
+RUN touch /opt/app-root/.ssh/trivial_ssh_hosts
+
 # Set the default CMD to print the usage of the language image
 CMD $STI_SCRIPTS_PATH/usage
