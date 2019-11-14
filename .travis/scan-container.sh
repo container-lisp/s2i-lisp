@@ -30,11 +30,11 @@ IFS=$'\n\t'
 # Configure the rlgl cli.
 
 # Download and extract the client
-wget -qO - http://rl.gl/cli/rlgl-linux-amd64.tgz | \
+wget -qO - https://rl.gl/cli/rlgl-linux-amd64.tgz | \
     tar --strip-components=2 -xvzf - ./rlgl/rlgl
 
 # Log into the server
-./rlgl login http://rl.gl
+./rlgl login https://rl.gl
 
 # Generate a player ID for use during report evaluation
 ID=$(./rlgl start)
