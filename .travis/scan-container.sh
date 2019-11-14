@@ -61,7 +61,8 @@ wget -qO clair-scanner https://github.com/arminc/clair-scanner/releases/download
 # Use Anchore's inline scanner...
 # -----------------------------------------------------------------------------
 
-curl -s https://ci-tools.anchore.io/inline_scan-v0.4.1 | bash -s -- -t 3300 -p -r $REPO
+curl -s https://ci-tools.anchore.io/inline_scan-v0.4.1 | bash -s -- -t 3300 -r $REPO
+ls -lrt
 if test -f anchore-reports/${REPO}*-vuln.json; then 
     ./rlgl e --id=$ID --policy=$RLGL_POLICY anchore-reports/${REPO}*-vuln.json
 fi
