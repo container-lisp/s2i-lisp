@@ -13,7 +13,7 @@ services:
 
 before_install:
   - make
-  - # ./.travis/scan-container.sh
+  - ./.travis/scan-container.sh
 
 script:
 - 
