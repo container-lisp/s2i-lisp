@@ -23,6 +23,9 @@
 # for details.
 # -----------------------------------------------------------------------------
 
+# Experiment by scanning an old container image...
+REPO=containerlisp/lisp-10-ubi8:20190711.62
+
 set -euo pipefail
 IFS=$'\n\t'
 
