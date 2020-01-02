@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # -----------------------------------------------------------------------------
-# Copyright 2019  Anthony Green
+# Copyright 2019, 2020  Anthony Green
 # 
 # Licensed under the Apache License, Version 2.0 (the "License"); you
 # may not use this file except in compliance with the License. You may
@@ -38,7 +38,7 @@ wget -qO - https://rl.gl/cli/rlgl-linux-amd64.tgz | \
     tar --strip-components=2 -xvzf - ./rlgl/rlgl
 
 # Log into the server
-./rlgl login https://rl.gl
+./rlgl login --key=$RLGL_KEY https://rl.gl
 
 # Generate a player ID for use during report evaluation
 ID=$(./rlgl start)
