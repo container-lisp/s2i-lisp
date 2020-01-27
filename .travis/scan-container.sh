@@ -43,6 +43,9 @@ wget -qO - https://rl.gl/cli/rlgl-linux-amd64.tgz | \
 # Generate a player ID for use during report evaluation
 ID=$(./rlgl start)
 
+# Set the policy
+RLGL_POLICY=https://github.com/container-lisp/rlgl-policy.git
+
 # -----------------------------------------------------------------------------
 # Use the Clair scanner...
 # -----------------------------------------------------------------------------
