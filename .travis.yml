@@ -17,7 +17,7 @@ before_install:
   - ./.travis/scan-container.sh
 
 script:
-- 
+- ls
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
