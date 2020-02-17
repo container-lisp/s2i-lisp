@@ -22,7 +22,7 @@ ENV HOME=/opt/app-root \
     LANGUAGE=C.utf8 \
     LISP_VERSION=1.0 \
     SBCL_VERSION=2.0.1 \
-    LIBEV_VERSION=4.27 \
+    LIBEV_VERSION=4.31 \
     LIBSSH2_VERSION=1.9.0
 
 RUN rm /etc/rhsm-host && \
