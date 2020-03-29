@@ -21,7 +21,7 @@ ENV HOME=/opt/app-root \
     LANG=C.utf8 \
     LANGUAGE=C.utf8 \
     LISP_VERSION=1.0 \
-    SBCL_VERSION=2.0.2 \
+    SBCL_VERSION=2.0.3 \
     LIBEV_VERSION=4.31 \
     LIBSSH2_VERSION=1.9.0
 
