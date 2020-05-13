@@ -61,7 +61,9 @@ docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-sc
 sleep 1
 DOCKER_GATEWAY=$(docker network inspect bridge --format "{{range .IPAM.Config}}{{.Gateway}}{{end}}")
 
-wget -qO clair-scanner https://github.com/arminc/clair-scanner/releases/download/v12/clair-scanner_linux_amd64 && chmod +x clair-scanner
+wget -qO clair-scanner https://github.com/arminc/clair-scanner/releases/download/v12/clair-scanner_linux_amd64
+ls -l
+chmod +x clair-scanner
 
 ./clair-scanner --ip="$DOCKER_GATEWAY" -r clair-report.json $REPO
 ./rlgl e --id=$ID --policy=$RLGL_POLICY clair-report.json
