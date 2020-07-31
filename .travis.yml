@@ -14,7 +14,7 @@ services:
 before_install:
   - make
   - travis_wait 59 sleep infinity &
-  - ./.travis/scan-container.sh
+  - # ./.travis/scan-container.sh
 
 script:
 - ls
