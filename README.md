@@ -72,6 +72,16 @@ $ oc create -f lisp-image-streams.json -n openshift
 $ oc create -f lisp-web-basic-s2i.json -n openshift
 ```
 
+Overriding Quicklisp Packages
+-----------------------------
+
+If the top-level directory of your source repo contains a
+`local-projects` directory, then all of the contents of that directory
+will be moved to quicklisp's `local-projects` directory before
+build-time.  This is useful is you ever need to use a different
+version of a quicklisp-provided package, perhaps with local changes.
+
+
 Environment variables
 ---------------------
 

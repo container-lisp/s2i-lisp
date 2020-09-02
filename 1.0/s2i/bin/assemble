@@ -18,6 +18,13 @@ PROJECT_PATH=./quicklisp/local-projects/${APP_SYSTEM_NAME}
 mkdir -vp "${PROJECT_PATH}"
 cp -Rf /tmp/src/. "${PROJECT_PATH}"
 
+# Move local projects into the quicklisp local-projects dir
+if [ -d "${PROJECT_PATH}/local-projects" ]; then
+    if ! [ -z "$(ls -A ${PROJECT_PATH}/local-projects)" ]; then
+	mv "${PROJECT_PATH}/local-projects/*" ./quicklisp/local-projects
+    fi
+fi
+
 echo "---> Building your Common Lisp application from source ..."
 if [ -n "${APP_BUILD_SCRIPT}" ]; then
     SBCL_OPTS=(
