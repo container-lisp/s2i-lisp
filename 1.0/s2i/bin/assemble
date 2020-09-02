@@ -21,7 +21,7 @@ cp -Rf /tmp/src/. "${PROJECT_PATH}"
 # Move local projects into the quicklisp local-projects dir
 if [ -d "${PROJECT_PATH}/local-projects" ]; then
     if ! [ -z "$(ls -A ${PROJECT_PATH}/local-projects)" ]; then
-	mv "${PROJECT_PATH}/local-projects/*" ./quicklisp/local-projects
+	mv ${PROJECT_PATH}/local-projects/* ./quicklisp/local-projects
     fi
 fi
 
