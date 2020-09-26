@@ -67,6 +67,8 @@ RUN curl -L -O "https://downloads.sourceforge.net/project/sbcl/sbcl/${SBCL_VERSI
     cd .. && \
     rm -rf sbcl-${SBCL_VERSION}-x86-64-linux-binary.tar.bz2 \
        sbcl-${SBCL_VERSION}-x86-64-linux && \
+    git clone --depth 1 https://github.com/joaotavora/sly-quicklisp.git && \
+    mv sly-quicklisp common-lisp && \
     sbcl --non-interactive --disable-debugger --load install.lisp
 
 RUN usermod -d ${HOME} default && \
