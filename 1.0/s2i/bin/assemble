@@ -43,3 +43,4 @@ echo sbcl "${SBCL_OPTS[@]}"
 sbcl "${SBCL_OPTS[@]}"
 
 chown -R 1001 ./quicklisp
+find /opt/app-root/.cache/common-lisp/ -type d | xargs -n1 chmod 775
