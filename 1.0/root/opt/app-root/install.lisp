@@ -1,4 +1,4 @@
-(defvar *dist-url* "http://beta.quicklisp.org/dist/quicklisp/2021-02-28/distinfo.txt")
+(defvar *dist-url* "http://beta.quicklisp.org/dist/quicklisp/2021-04-11/distinfo.txt")
 
 (load "quicklisp.lisp")
 
