@@ -16,16 +16,19 @@ jobs:
   build:
     name: Build image
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
+
+    - name: Get quicklisp version
+      id: date
+      run: echo "::set-output name=date::$(date -d $(grep 1.0/root/opt/app-root/install.lisp | awk -F'/' '{ print $6 }') +%Y%m%d)"
 
     - name: Buildah Action
       uses: redhat-actions/buildah-build@v2
       with:
         context: "1.0"
         image: lisp-10-ubi8
-        tags: ${{ github.sha }}
+        tags: latest ${{ github.sha }} ${{steps.date.outputs.date}}
         dockerfiles: |
           1.0/Dockerfile
         build-args: |
