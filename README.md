@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/container-lisp/s2i-lisp.svg?branch=master)](https://travis-ci.org/container-lisp/s2i-lisp)
+[Build Status](https://github.com/container-lisp/s2i-lisp/actions/workflows/build.yml/badge.svg)
 
 Common Lisp + Quicklisp OpenShift Build Image
 =============================================
@@ -17,7 +17,7 @@ application using standalone
 [S2I](https://github.com/openshift/source-to-image) and then run the
 resulting image with [docker](http://docker.io) execute:
 ```
-$ s2i build https://github.com/container-lisp/sample-lisp-app containerlisp/lisp-10-ubi8 sample-lisp-app
+$ s2i build https://github.com/container-lisp/sample-lisp-app quay.io/containerlisp/lisp-10-ubi8 sample-lisp-app
 $ docker run -p 8080:8080 sample-lisp-app
 ```
 
@@ -30,7 +30,7 @@ $ curl 127.0.0.1:8080
 
 You will likely, however, prefer [OpenShift](https://www.openshift.com), where applications are created like so:
 ```
-$ oc new-app containerlisp/lisp-10-ubi8~git://github.com/container-lisp/sample-lisp-app
+$ oc new-app quay.io/containerlisp/lisp-10-ubi8~git://github.com/container-lisp/sample-lisp-app
 ```
 
 A [slynk](https://github.com/joaotavora/sly) server will be started on
@@ -146,8 +146,8 @@ repository.
 Public Container Images
 -----------------------
 
-The ubi8-based S2I images are published on dockerhub, as
-`containerlisp/lisp-10-ubi8`.  Image tags are as follows:
+The ubi8-based S2I images are published on quay.io, as
+`quay.io/containerlisp/lisp-10-ubi8`.  Image tags are as follows:
 
 * `latest`: the most recent build of the very latest quicklisp, SBCL
   and OS bits.
@@ -161,7 +161,7 @@ The ubi8-based S2I images are published on dockerhub, as
   same as above. It is provided as a convenience in order to map back
   to the original source version.
 
-* Quicklisp dist version date + travis-ci build number (eg. `20181210.26`):
+* Quicklisp dist version date + build number (eg. `20181210.26`):
   This identifies a specific build for a specific
   quicklisp distribution.  This is a unique build, and will never
   change.
