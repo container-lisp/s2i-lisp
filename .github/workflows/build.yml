@@ -32,6 +32,7 @@ jobs:
       run: echo "::set-output name=run::${GITHUB_RUN_NUMBER}"
 
     - name: Buildah Action
+      id: build-image
       uses: redhat-actions/buildah-build@v2
       with:
         context: "1.0"
@@ -40,3 +41,16 @@ jobs:
         dockerfiles: |
           1.0/Dockerfile
         build-args: |
+
+    - name: Push To quay.io
+      id: push-to-quay
+      uses: redhat-actions/push-to-registry@v2
+      with:
+        image: ${{ steps.build-image.outputs.image }}
+        tags: ${{ steps.build-image.outputs.tags }}
+        registry: quay.io/containerlisp
+        username: ${{ secrets.QUAY_USERNAME }}
+        password: ${{ secrets.QUAY_PASSWORD }}
+
+    - name: Print image url
+      run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"
