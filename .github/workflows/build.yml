@@ -23,7 +23,7 @@ jobs:
     - name: Buildah Action
       uses: redhat-actions/buildah-build@v2
       with:
-        context: 1.0
+        context: "1.0"
         image: lisp-10-ubi8
         tags: ${{ github.sha }}
         dockerfiles: |
