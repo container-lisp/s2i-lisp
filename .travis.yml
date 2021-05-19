@@ -5,7 +5,8 @@ language: c
 env:
   global:
      - COMMIT=${TRAVIS_COMMIT::7}
-     - REPO=containerlisp/lisp-10-ubi8
+     - DREPO=containerlisp/lisp-10-ubi8
+     - QREPO=quay.io/containerlisp/lisp-10-ubi8
      - RLGL_POLICY=https://github.com/container-lisp/rlgl-policy.git
 
 services:
@@ -25,12 +26,21 @@ after_success:
       echo Logging in, tagging and pushing;
       docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" quay.io;
       QLTAG=$(date -d $(grep http://beta.quicklisp.org 1.0/root/opt/app-root/install.lisp | awk -F'/' '{ print $6 }') +%Y%m%d);
-      docker tag $REPO:latest $REPO:$QLTAG;
-      docker tag $REPO:latest $REPO:$QLTAG.$TRAVIS_BUILD_NUMBER;
-      docker tag $REPO:latest $REPO:$COMMIT;
-      docker push $REPO:latest;
-      docker push $REPO:$QLTAG;
-      docker push $REPO:$QLTAG.$TRAVIS_BUILD_NUMBER;
-      docker push $REPO:$COMMIT;
+      # Push to Docker Hub
+      docker tag $DREPO:latest $DREPO:$QLTAG;
+      docker tag $DREPO:latest $DREPO:$QLTAG.$TRAVIS_BUILD_NUMBER;
+      docker tag $DREPO:latest $DREPO:$COMMIT;
+      docker push $DREPO:latest;
+      docker push $DREPO:$QLTAG;
+      docker push $DREPO:$QLTAG.$TRAVIS_BUILD_NUMBER;
+      docker push $DREPO:$COMMIT;
+      # Push to Quay
+      docker tag $DREPO:latest $QREPO:$QLTAG;
+      docker tag $DREPO:latest $QREPO:$QLTAG.$TRAVIS_BUILD_NUMBER;
+      docker tag $DREPO:latest $QREPO:$COMMIT;
+      docker push $QREPO:latest;
+      docker push $QREPO:$QLTAG;
+      docker push $QREPO:$QLTAG.$TRAVIS_BUILD_NUMBER;
+      docker push $QREPO:$COMMIT;
     fi
   - echo All done.
