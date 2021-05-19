@@ -27,5 +27,5 @@ jobs:
         image: lisp-10-ubi8
         tags: ${{ github.sha }}
         dockerfiles: |
-          Dockerfile
+          1.0/Dockerfile
         build-args: |
