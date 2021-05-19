@@ -13,6 +13,7 @@ services:
 
 before_install:
   - pip install selectors
+  - pip3 install selectors
   - make
   - travis_wait 59 sleep infinity &
   - # ./.travis/scan-container.sh
@@ -22,6 +23,7 @@ script:
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      echo Logging in, tagging and pushing;
       docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" quay.io;
       QLTAG=$(date -d $(grep http://beta.quicklisp.org 1.0/root/opt/app-root/install.lisp | awk -F'/' '{ print $6 }') +%Y%m%d);
       docker tag $REPO:latest $REPO:$QLTAG;
