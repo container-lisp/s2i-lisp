@@ -1,4 +1,4 @@
-SKIP_SQUASH?=0
+SKIP_SQUASH?=1
 
 build = hack/build.sh
 
