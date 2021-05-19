@@ -23,12 +23,16 @@ jobs:
       id: date
       run: echo "::set-output name=date::$(date -d $(grep http://beta.quicklisp.org 1.0/root/opt/app-root/install.lisp | awk -F'/' '{ print $6 }') +%Y%m%d)"
 
+    - name: Get short git commit hash
+      id: hash
+      run: echo "::set-output name=hash::${${{ github.sha }}::7}"
+
     - name: Buildah Action
       uses: redhat-actions/buildah-build@v2
       with:
         context: "1.0"
         image: lisp-10-ubi8
-        tags: latest ${{ github.sha }} ${{steps.date.outputs.date}}
+        tags: latest ${{ steps.hash.outputs.hash }} ${{ steps.date.outputs.date }} ${{ steps.date.outputs.date }}.${{ env.GITHUB_RUN_NUMBER }}
         dockerfiles: |
           1.0/Dockerfile
         build-args: |
