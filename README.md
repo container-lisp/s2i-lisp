@@ -1,4 +1,4 @@
-[Build Status](https://github.com/container-lisp/s2i-lisp/actions/workflows/build.yml/badge.svg)
+[![Build Status](https://github.com/container-lisp/s2i-lisp/actions/workflows/build.yml/badge.svg)](https://github.com/container-lisp/s2i-lisp/actions)
 
 Common Lisp + Quicklisp OpenShift Build Image
 =============================================
