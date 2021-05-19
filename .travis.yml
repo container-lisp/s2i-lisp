@@ -13,7 +13,6 @@ services:
   - docker
 
 before_install:
-  - pip install selectors
   - make
   - travis_wait 59 sleep infinity &
   - # ./.travis/scan-container.sh
