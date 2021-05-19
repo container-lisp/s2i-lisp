@@ -25,7 +25,7 @@ jobs:
 
     - name: Get short git commit hash
       id: hash
-      run: echo "::set-output name=hash::${${{ github.sha }}::7}"
+      run: echo "::set-output name=hash::${GITHUB_SHA::7}"
 
     - name: Buildah Action
       uses: redhat-actions/buildah-build@v2
