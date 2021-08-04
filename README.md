@@ -55,12 +55,6 @@ There are a number of excellent screencasts and tutorials on using SLY
 on the project web site at
 [https://github.com/joaotavora/sly](https://github.com/joaotavora/sly).
 
-Note that slynk, by default, is configured to only listen on the
-localhost loopback device.  This works well with OpenShift port
-forwarding, as above, but if you run this container by hand you will
-want to use the docker `--net host` option to allow for connections to
-swank.
-
 Also note that instead of using sly, you can also decide to use slime,
 the traditional emacs common lisp development environment. See below
 the section about environment variable `DEV_BACKEND` on how to do
