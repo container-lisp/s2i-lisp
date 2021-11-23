@@ -19,6 +19,7 @@ mkdir -vp "${PROJECT_PATH}"
 cp -Rf /tmp/src/. "${PROJECT_PATH}"
 
 # Move local projects into the quicklisp local-projects dir
+find "${PROJECT_PATH}"
 if [ -d "${PROJECT_PATH}/local-projects" ]; then
     if ! [ -z "$(ls -A ${PROJECT_PATH}/local-projects)" ]; then
         echo "   > setting up local projects $(ls -A ${PROJECT_PATH}/local-projects)"
@@ -26,6 +27,8 @@ if [ -d "${PROJECT_PATH}/local-projects" ]; then
     else
         echo "   > no local projects"
     fi
+else
+    echo "   > no local-project dir"
 fi
 
 echo "---> Building your Common Lisp application from source ..."
