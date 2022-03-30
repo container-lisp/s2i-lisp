@@ -23,7 +23,7 @@ ENV HOME=/opt/app-root \
     LISP_VERSION=1.0 \
     SBCL_VERSION=2.2.3 \
     LIBEV_VERSION=4.33 \
-    LIBSSH2_VERSION=1.9.0
+    LIBSSH2_VERSION=1.10.0
 
 RUN rm /etc/rhsm-host && \
     yum install -y \
