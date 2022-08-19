@@ -28,7 +28,7 @@ if [ -d "${PROJECT_PATH}/local-projects" ]; then
         echo "   > no local projects"
     fi
 else
-    echo "   > no local-project dir"
+    echo "   > no local-projects dir"
 fi
 
 echo "---> Building your Common Lisp application from source ..."
