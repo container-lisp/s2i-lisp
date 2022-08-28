@@ -23,11 +23,13 @@ ENV HOME=/opt/app-root \
     LISP_VERSION=1.0 \
     SBCL_VERSION=2.2.6 \
     LIBEV_VERSION=4.33 \
-    LIBSSH2_VERSION=1.10.0
+    LIBSSH2_VERSION=1.10.0 \
+    LISP_BASE_BUILD_DATE=Sun Aug 28 10:54:43 AM EDT 2022
 
 RUN rm /etc/rhsm-host && \
     yum install -y \
         bzip2 git make patch automake autoconf libtool gcc gcc-c++ libuv openssl-devel && \
+    yum update -y && \
     yum clean -y all && \
     locale -a && \
     gcc --version
