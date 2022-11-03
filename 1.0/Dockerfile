@@ -24,7 +24,7 @@ ENV HOME=/opt/app-root \
     SBCL_VERSION=2.2.9 \
     LIBEV_VERSION=4.33 \
     LIBSSH2_VERSION=1.10.0 \
-    LISP_BASE_BUILD_DATE="Mon Oct 24 06:57:38 AM EDT 2022"
+    LISP_BASE_BUILD_DATE="Thu Nov  3 04:24:22 PM EDT 2022"
 
 RUN rm /etc/rhsm-host && \
     yum install -y \
