@@ -23,7 +23,7 @@ ENV HOME=/opt/app-root \
     LISP_VERSION=1.0 \
     SBCL_VERSION=2.4.4 \
     LIBEV_VERSION=4.33 \
-    LIBSSH2_VERSION=1.10.0 \
+    LIBSSH2_VERSION=1.11.0 \
     LISP_BASE_BUILD_DATE="Thu 16 Mar 2023 07:49:06 AM EDT"
 
 RUN rm /etc/rhsm-host && \
@@ -50,8 +50,8 @@ RUN curl -O "http://dist.schmorp.de/libev/Attic/libev-${LIBEV_VERSION}.tar.gz" &
     rm -rf libev*
 
 # Build libssh2 from source since it is not available in ubi8-base nor ubi8-app-stream repos
-RUN curl -O "https://www.libssh2.org/download/libssh2-${LIBSSH2_VERSION}.tar.gz" && \
-    tar xvf libssh2-${LIBSSH2_VERSION}.tar.gz && \
+RUN curl -O "https://libssh2.org/download/libssh2-${LIBSSH2_VERSION}.tar.bz2" && \
+    tar xvf libssh2-${LIBSSH2_VERSION}.tar.bz2 && \
     cd libssh2-${LIBSSH2_VERSION} && \
     ./configure --prefix=/usr --with-crypto=openssl && \
     make && \
