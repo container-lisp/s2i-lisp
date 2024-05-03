@@ -97,10 +97,10 @@ ADD microscanner /
 RUN /microscanner $AQUACODE -c
 EOF
 
-    # FIXME: this fails because Aqua can't handle ubi8 images yet
+    # FIXME: this fails because Aqua can't handle ubi9 images yet
     docker build . -f Dockerfile.scan || true
 
-    # TODO: Run rlgl here once Aqua has fixed their ubi8 scanner
+    # TODO: Run rlgl here once Aqua has fixed their ubi9 scanner
 fi
 
 # -----------------------------------------------------------------------------

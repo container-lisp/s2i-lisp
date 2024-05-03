@@ -36,7 +36,7 @@ jobs:
       uses: redhat-actions/buildah-build@v2
       with:
         context: "1.0"
-        image: lisp-10-ubi8
+        image: lisp-10-ubi9
         tags: latest ${{ steps.hash.outputs.hash }} ${{ steps.date.outputs.date }} ${{ steps.date.outputs.date }}.${{ steps.run.outputs.run }}
         dockerfiles: |
           1.0/Dockerfile

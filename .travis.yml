@@ -5,8 +5,8 @@ language: c
 env:
   global:
      - COMMIT=${TRAVIS_COMMIT::7}
-     - DREPO=containerlisp/lisp-10-ubi8
-     - QREPO=quay.io/containerlisp/lisp-10-ubi8
+     - DREPO=containerlisp/lisp-10-ubi9
+     - QREPO=quay.io/containerlisp/lisp-10-ubi9
      - RLGL_POLICY=https://github.com/container-lisp/rlgl-policy.git
 
 services:
