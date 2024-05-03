@@ -4,7 +4,7 @@
 # Name of resulting image will be: 'NAMESPACE/BASE_IMAGE_NAME-VERSION-OS'.
 #
 # BASE_IMAGE_NAME - Usually name of the main component within container.
-# OS - Specifies distribution - "ubi8"
+# OS - Specifies distribution - "ubi9"
 # VERSION - Specifies the image version - (must match with subdirectory in repo)
 # TEST_MODE - If set, build a candidate image and test it
 # TAG_ON_SUCCESS - If set, tested image will be re-tagged as a non-candidate

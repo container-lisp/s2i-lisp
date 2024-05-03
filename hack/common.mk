@@ -2,7 +2,7 @@ SKIP_SQUASH?=1
 
 build = hack/build.sh
 
-OS = ubi8
+OS = ubi9
 
 script_env = \
 	SKIP_SQUASH=$(SKIP_SQUASH)                      \

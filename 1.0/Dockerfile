@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/s2i-core
+FROM registry.access.redhat.com/ubi9/s2i-core
 
 # This image provides a Common Lisp environment based on QuickLisp and
 # that you can use to run your Common Lisp applications.
@@ -37,7 +37,7 @@ RUN rm /etc/rhsm-host && \
 WORKDIR $HOME
 COPY ./root/ /
 
-# Build libev from source since it is not available in ubi8-base nor ubi8-app-stream repos
+# Build libev from source since it is not available in ubi9-base nor ubi9-app-stream repos
 RUN curl -O "http://dist.schmorp.de/libev/Attic/libev-${LIBEV_VERSION}.tar.gz" && \
     tar xvf libev-${LIBEV_VERSION}.tar.gz && \
     cd libev-${LIBEV_VERSION} && \
@@ -49,7 +49,7 @@ RUN curl -O "http://dist.schmorp.de/libev/Attic/libev-${LIBEV_VERSION}.tar.gz" &
     cd "$HOME" && \
     rm -rf libev*
 
-# Build libssh2 from source since it is not available in ubi8-base nor ubi8-app-stream repos
+# Build libssh2 from source since it is not available in ubi9-base nor ubi9-app-stream repos
 RUN curl -O "https://libssh2.org/download/libssh2-${LIBSSH2_VERSION}.tar.bz2" && \
     tar xvf libssh2-${LIBSSH2_VERSION}.tar.bz2 && \
     cd libssh2-${LIBSSH2_VERSION} && \

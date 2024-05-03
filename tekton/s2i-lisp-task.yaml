@@ -22,7 +22,7 @@ spec:
     - name: generate
       image: quay.io/openshift-pipeline/s2i
       workingdir: /workspace/source
-      command: ['s2i', 'build', '$(inputs.params.PATH_CONTEXT)', 'quay.io/containerlisp/lisp-10-ubi8', '--as-dockerfile', '/gen-source/Dockerfile.gen']
+      command: ['s2i', 'build', '$(inputs.params.PATH_CONTEXT)', 'quay.io/containerlisp/lisp-10-ubi9', '--as-dockerfile', '/gen-source/Dockerfile.gen']
       volumeMounts:
         - name: gen-source
           mountPath: /gen-source
