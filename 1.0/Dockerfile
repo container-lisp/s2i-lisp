@@ -61,14 +61,14 @@ RUN curl -O "https://libssh2.org/download/libssh2-${LIBSSH2_VERSION}.tar.bz2" &&
     mkdir -p /opt/app-root/.ssh && \
     dnf remove -y openssl-devel && ls -la /opt/app-root
 
-RUN curl -L -O "https://downloads.sourceforge.net/project/sbcl/sbcl/2.3.4/sbcl-2.3.4-x86-64-linux-binary.tar.bz2" && \
+RUN curl -L -O "https://downloads.sourceforge.net/project/sbcl/sbcl/${SBCL_VERSION}/sbcl-${SBCL_VERSION}-x86-64-linux-binary.tar.bz2" && \
     curl -L -O https://beta.quicklisp.org/quicklisp.lisp && \
-    tar -xvf sbcl-2.3.4-x86-64-linux-binary.tar.bz2 && \
-    cd sbcl-2.3.4-x86-64-linux && \
+    tar -xvf sbcl-${SBCL_VERSION}-x86-64-linux-binary.tar.bz2 && \
+    cd sbcl-${SBCL_VERSION}-x86-64-linux && \
     ./install.sh && \
     cd .. && \
-    rm -rf sbcl-2.3.4-x86-64-linux-binary.tar.bz2 \
-       sbcl-2.3.4-x86-64-linux && \
+    rm -rf sbcl-${SBCL_VERSION}-x86-64-linux-binary.tar.bz2 \
+       sbcl-${SBCL_VERSION}-x86-64-linux && \
     git clone --depth 1 https://github.com/joaotavora/sly-quicklisp.git && \
     mv sly-quicklisp common-lisp && \
     sbcl --non-interactive --disable-debugger --load install.lisp
